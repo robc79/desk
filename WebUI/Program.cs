@@ -1,7 +1,15 @@
+using Desk.Infrastructure.Sql;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+
+builder.Services.AddDbContext<DeskDbContext>(options => {
+    var connString = builder.Configuration.GetConnectionString("Desk");
+    options.UseSqlServer(connString);
+});
 
 var app = builder.Build();
 
