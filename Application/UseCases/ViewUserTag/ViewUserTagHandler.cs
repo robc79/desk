@@ -26,7 +26,7 @@ public class ViewUserTagHandler : IRequestHandler<ViewUserTagRequest, TagDto?>
             Owner = new UserDto
             {
                 Id = tag.Owner.Id,
-                Username = tag.Owner.Username
+                Username = tag.Owner.UserName
             }
         };
     }

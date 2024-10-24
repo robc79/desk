@@ -44,9 +44,9 @@ public class TagRepository : ITagRepository
         return tag; 
     }
 
-    public async Task<Tag?> GetByUserAndIdAsync(int tagId, int userId, CancellationToken ct)
+    public async Task<Tag?> GetByUserAndIdAsync(int tagId, Guid userId, CancellationToken ct)
     {
-        var tag = await _dbContext.Tags.SingleOrDefaultAsync(t => t.Id == tagId && t.UserId == userId, ct);
+        var tag = await _dbContext.Tags.SingleOrDefaultAsync(t => t.Id == tagId && t.OwnerId == userId, ct);
 
         return tag;
     }

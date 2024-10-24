@@ -4,7 +4,7 @@ public class Tag
 {
     public int Id { get; protected set; }
 
-    public int UserId { get; set; }
+    public Guid OwnerId { get; set; }
 
     private User _owner;
 
@@ -41,6 +41,8 @@ public class Tag
     }
 
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
+    protected Tag() { }
+
     public Tag(User owner, string name)
 #pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
     {

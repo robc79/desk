@@ -1,10 +1,11 @@
 using Desk.Domain.Entities;
 using Desk.Domain.Repositories;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace Desk.Infrastructure.Sql;
 
-public class DeskDbContext : DbContext, IUnitOfWork
+public class DeskDbContext : IdentityDbContext<User, Role, Guid>, IUnitOfWork
 {
     public DeskDbContext(DbContextOptions<DeskDbContext> options) : base(options)
     {

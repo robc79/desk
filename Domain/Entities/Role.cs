@@ -2,6 +2,6 @@ using Microsoft.AspNetCore.Identity;
 
 namespace Desk.Domain.Entities;
 
-public class User : IdentityUser<Guid>
+public class Role : IdentityRole<Guid>
 {
 }

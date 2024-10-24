@@ -7,9 +7,9 @@ public class ViewUserTagRequest : IRequest<TagDto?>
 {
     public int TagId { get; }
 
-    public int UserId { get; }
+    public Guid UserId { get; }
 
-    public ViewUserTagRequest(int tagId, int userId)
+    public ViewUserTagRequest(int tagId, Guid userId)
     {
         TagId = tagId;
         UserId = userId;
