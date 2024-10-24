@@ -16,4 +16,10 @@ public class DeskDbContext : DbContext, IUnitOfWork
     {
         _ = await SaveChangesAsync(ct);
     }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        base.OnModelCreating(modelBuilder);
+        modelBuilder.ApplyConfigurationsFromAssembly(GetType().Assembly);
+    }
 }
