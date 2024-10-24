@@ -1,4 +1,6 @@
+using Desk.Domain.Repositories;
 using Desk.Infrastructure.Sql;
+using Desk.Infrastructure.Sql.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,6 +12,9 @@ builder.Services.AddDbContext<DeskDbContext>(options => {
     var connString = builder.Configuration.GetConnectionString("Desk");
     options.UseSqlServer(connString);
 });
+
+builder.Services.AddScoped<IUnitOfWork>(services => services.GetRequiredService<DeskDbContext>());
+builder.Services.AddScoped<ITagRepository, TagRepository>();
 
 var app = builder.Build();
 
