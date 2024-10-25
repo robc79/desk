@@ -8,7 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
-builder.Services.AddIdentityCore<User>().AddEntityFrameworkStores<DeskDbContext>();
+builder.Services.AddDefaultIdentity<User>().AddEntityFrameworkStores<DeskDbContext>();
 
 builder.Services.AddDbContext<DeskDbContext>(options => {
     var connString = builder.Configuration.GetConnectionString("Desk");

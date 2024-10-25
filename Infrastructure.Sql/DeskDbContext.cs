@@ -13,8 +13,6 @@ public class DeskDbContext : IdentityDbContext<User, Role, Guid>, IUnitOfWork
 
     public DbSet<Tag> Tags { get; set; }
 
-    public DbSet<User> Users { get; set; }
-
     public async Task CommitChangesAsync(CancellationToken ct)
     {
         _ = await SaveChangesAsync(ct);
