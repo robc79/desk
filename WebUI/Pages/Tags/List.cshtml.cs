@@ -18,7 +18,7 @@ public class ListModel : PageModel
         _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator)); 
     }
 
-    public List<TagDto> Tags { get; set; }
+    public List<TagDto> Tags { get; set; } = [];
 
     public async Task<IActionResult> OnGetAsync(CancellationToken ct)
     {

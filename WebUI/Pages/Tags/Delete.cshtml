@@ -4,4 +4,21 @@
     ViewData["Title"] = "Delete Tag";
 }
 
-<h1>Delete Tag - @Model.Tag.Name?</h1>
+<div class="card mb-3">
+    <div class="card-body">
+        <div class="card-title">
+            <h1>Delete Tag - @Model.Tag?.Name?</h1>
+        </div>
+        <div class="card-text">
+            This operation cannot be undone.
+        </div>
+    </div>
+    <div class="card-footer">
+        <form method="post">
+            <input type="submit" class="btn btn-danger" value="Delete" />
+            | <a asp-page="/Tags/List">Cancel</a>
+        </form>
+    </div>
+</div>
+
+
