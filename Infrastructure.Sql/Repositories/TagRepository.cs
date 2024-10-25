@@ -32,21 +32,21 @@ public class TagRepository : ITagRepository
 
     public async Task<List<Tag>> GetAllAsync(CancellationToken ct)
     {
-        var tags = await _dbContext.Tags.ToListAsync(ct);
+        var tags = await _dbContext.Tags.Include(t => t.Owner).ToListAsync(ct);
 
         return tags;
     }
 
     public async Task<Tag?> GetByIdAsync(int id, CancellationToken ct)
     {
-        var tag = await _dbContext.Tags.SingleOrDefaultAsync(t => t.Id == id, ct);
+        var tag = await _dbContext.Tags.Include(t => t.Owner).SingleOrDefaultAsync(t => t.Id == id, ct);
 
         return tag; 
     }
 
     public async Task<Tag?> GetByUserAndIdAsync(int tagId, Guid userId, CancellationToken ct)
     {
-        var tag = await _dbContext.Tags.SingleOrDefaultAsync(t => t.Id == tagId && t.OwnerId == userId, ct);
+        var tag = await _dbContext.Tags.Include(t => t.Owner).SingleOrDefaultAsync(t => t.Id == tagId && t.OwnerId == userId, ct);
 
         return tag;
     }
