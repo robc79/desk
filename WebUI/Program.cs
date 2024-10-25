@@ -3,6 +3,7 @@ using Desk.Domain.Repositories;
 using Desk.Infrastructure.Sql;
 using Desk.Infrastructure.Sql.Repositories;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
