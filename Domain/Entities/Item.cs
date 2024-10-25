@@ -4,6 +4,8 @@ public class Item
 {
     public int Id { get; protected set; }
 
+    public Guid OwnerId { get; set; }
+    
     private User _owner;
 
     public User Owner

@@ -53,7 +53,7 @@ namespace Infrastructure.Sql.Migrations
 
                     b.HasIndex("OwnerId");
 
-                    b.ToTable("Items");
+                    b.ToTable("Items", (string)null);
                 });
 
             modelBuilder.Entity("Desk.Domain.Entities.Role", b =>
@@ -107,7 +107,7 @@ namespace Infrastructure.Sql.Migrations
 
                     b.HasIndex("OwnerId");
 
-                    b.ToTable("Tags");
+                    b.ToTable("Tags", (string)null);
                 });
 
             modelBuilder.Entity("Desk.Domain.Entities.User", b =>
@@ -188,7 +188,7 @@ namespace Infrastructure.Sql.Migrations
 
                     b.HasIndex("TagsId");
 
-                    b.ToTable("ItemTags");
+                    b.ToTable("ItemTags", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
