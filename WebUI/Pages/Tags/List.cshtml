@@ -24,9 +24,17 @@
             </tr>
         }
     </tbody>
-    <tfoot>
-        <tr>
-            <td colspan="2"><a asp-page="/Tags/Add">Add</a></td>
-        </tr>
-    </tfoot>
 </table>
+
+<form method="post">
+    <div>
+        <label asp-for="Form.Name" class="form-label"></label>
+        <input asp-for="Form.Name" class="form-control" />
+        <span asp-validation-for="Form.Name" class="text-danger"></span>
+    </div>
+    <input type="submit" value="add" />
+</form>
+
+@section scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
