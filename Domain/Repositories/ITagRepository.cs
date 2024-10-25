@@ -6,6 +6,8 @@ public interface ITagRepository
 {
     Task<Tag?> GetByIdAsync(int id, CancellationToken ct);
 
+    Task<List<Tag>> GetByUserAsync(Guid userId, CancellationToken ct);
+
     Task<Tag?> GetByUserAndIdAsync(int tagId, Guid userId, CancellationToken ct);
     
     Task<List<Tag>> GetAllAsync(CancellationToken ct);

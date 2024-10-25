@@ -50,4 +50,11 @@ public class TagRepository : ITagRepository
 
         return tag;
     }
+
+    public async Task<List<Tag>> GetByUserAsync(Guid userId, CancellationToken ct)
+    {
+        var tags = await _dbContext.Tags.Where(t => t.OwnerId == userId).ToListAsync(ct);
+
+        return tags;
+    }
 }
