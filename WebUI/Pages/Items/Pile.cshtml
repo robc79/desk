@@ -4,3 +4,33 @@
     ViewData["Title"] = "Pile";
 }
 
+<div class="text-center">
+    <h1 class="display-4">Pile of Shame</h1>
+</div>
+
+<div class="row justify-content-center mb-3">
+    <div class="col-6">
+        Your pile of shame is here.
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-10">
+    </div>
+    <div class="col-2 d-flex justify-content-end">
+        <a asp-page="/Items/Desk">Desk</a>
+    </div>
+</div>
+
+@foreach (var item in Model.PileItems)
+{
+    <partial name="_ItemSummaryPartial" model="item" />
+}
+
+<div class="row">
+    <div class="col-10">
+    </div>
+    <div class="col-2 d-flex justify-content-end">
+        <a asp-page="/Items/Desk">Desk</a>
+    </div>
+</div>

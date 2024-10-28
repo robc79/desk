@@ -24,7 +24,6 @@ public class DeskModel : PageModel
         var userId = Guid.Parse(idClaim!.Value);
         var request = new ViewUserItemsRequest(userId, ItemLocationEnum.Desk);
         var response = await _mediator.Send(request, ct);
-        DeskItems = response;    
+        DeskItems = response;
     }
 }
-
