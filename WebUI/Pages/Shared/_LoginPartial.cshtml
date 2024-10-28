@@ -6,9 +6,9 @@
 
 @if (SignInManager.IsSignedIn(User))
 {
-    <partial name="_SignedInNav" />
+    <partial name="_SignedInNavPartial" />
 }
 else
 {
-    <partial name="_SignedOutNav" />
+    <partial name="_SignedOutNavPartial" />
 }

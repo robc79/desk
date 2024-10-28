@@ -32,14 +32,21 @@ public class ItemRepository : IItemRepository
 
     public async Task<Item?> GetByUserAndIdAsync(int itemId, Guid userId, CancellationToken ct)
     {
-        var item = await _dbContext.Items.SingleOrDefaultAsync(i => i.Id == itemId && i.OwnerId == userId);
+        var item = await _dbContext
+        .Items
+        .Include(i => i.Tags)
+        .SingleOrDefaultAsync(i => i.Id == itemId && i.OwnerId == userId);
 
         return item;
     }
 
     public async Task<List<Item>> GetByUserAndLocation(ItemLocation location, Guid userId, CancellationToken ct)
     {
-        var items = await _dbContext.Items.Where(i => i.Location == location && i.OwnerId == userId).ToListAsync(ct);
+        var items = await _dbContext
+            .Items
+            .Include(i => i.Tags)
+            .Where(i => i.Location == location && i.OwnerId == userId)
+            .ToListAsync(ct);
 
         return items;
     }

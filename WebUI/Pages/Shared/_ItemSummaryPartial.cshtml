@@ -1,0 +1,17 @@
+@model Desk.Application.Dtos.SummaryItemDto
+
+<div class="card mb-3">
+    <div class="card-body">
+        @foreach (var tag in Model.Tags)
+        {
+            <span class="badge rounded-pill bg-primary">@tag.Name</span>
+        }
+        
+        <div>
+            <a asp-page="/Items/Edit" asp-route-itemId="@Model.Id">@Model.Name</a>
+        </div>
+        <div>
+            @Model.Description
+        </div>
+    </div>
+</div>

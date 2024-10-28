@@ -21,6 +21,7 @@ builder.Services.AddMediatR(c => c.RegisterServicesFromAssemblyContaining<ViewUs
 builder.Services.AddScoped<IUnitOfWork>(services => services.GetRequiredService<DeskDbContext>());
 builder.Services.AddScoped<ITagRepository, TagRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IItemRepository, ItemRepository>();
 
 var app = builder.Build();
 
