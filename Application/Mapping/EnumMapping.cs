@@ -9,7 +9,6 @@ public static class EnumMapping
     {
         return location switch
         {
-            ItemLocationEnum.None => ItemLocation.None,
             ItemLocationEnum.Pile => ItemLocation.Pile,
             ItemLocationEnum.Desk => ItemLocation.Desk,
             ItemLocationEnum.Tabletop => ItemLocation.Tabletop,
