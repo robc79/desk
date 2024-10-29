@@ -14,29 +14,7 @@
     </div>
 </div>
 
-<div class="row">
-    <div class="col-2">
-        <a asp-page="/Items/Pile">Pile</a>
-    </div>
-    <div class="col-8">
-    </div>
-    <div class="col-2 d-flex justify-content-end">
-        <a asp-page="/Items/Tabletop">Tabletop</a>
-    </div>
-</div>
-
 @foreach (var item in Model.DeskItems)
 {
     <partial name="_ItemSummaryPartial" model="item" />
 }
-
-<div class="row">
-    <div class="col-2">
-        <a asp-page="/Items/Pile">Pile</a>
-    </div>
-    <div class="col-8">
-    </div>
-    <div class="col-2 d-flex justify-content-end">
-        <a asp-page="/Items/Tabletop">Tabletop</a>
-    </div>
-</div>
