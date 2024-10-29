@@ -15,4 +15,4 @@
 - (l) S3 bucket storage implementation.
 - (l) Allow upload of one small image per item once in the tabletop location.
     - Show as a thumbnail on the summary card.
-- (s) Affiliate link banners for Element Games.
+- [done] (xs) Affiliate link banners for Element Games.
