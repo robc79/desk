@@ -1,6 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.Security.Claims;
 using Desk.Application.Dtos;
+using Desk.Application.UseCases.AddUserItem;
 using Desk.Application.UseCases.ListUserTags;
 using Desk.Application.UseCases.ViewTag;
 using MediatR;
@@ -43,6 +44,51 @@ public class AddModel : PageModel
         var idClaim = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier);
         var userId = Guid.Parse(idClaim!.Value);
         TagItems = await PopulateTagItemsAsync(userId, ct);
+    }
+
+    public async Task<IActionResult> OnPostAsync(CancellationToken ct)
+    {
+        var idClaim = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier);
+        var userId = Guid.Parse(idClaim!.Value);
+        TagItems = await PopulateTagItemsAsync(userId, ct);
+
+        if (!ModelState.IsValid)
+        {
+            return Page();
+        }
+
+        var selectedLocation = (ItemLocationEnum)Form.SelectedLocationId;
+        
+        if (!Enum.IsDefined(selectedLocation))
+        {
+            return BadRequest();
+        }
+
+        var selectedStatus = (ItemStatusEnum)Form.SelectedStatusId;
+
+        if (!Enum.IsDefined(selectedStatus))
+        {
+            return BadRequest();
+        }
+        
+        var request = new AddUserItemRequest(
+            userId,
+            Form.Name,
+            Form.Description,
+            selectedLocation,
+            selectedStatus,
+            Form.SelectedTagIds
+        );
+
+        var response = await _mediator.Send(request);
+
+        if (response.Error is not null)
+        {
+            // TODO: Indicate there is an error.
+            return Page();
+        }
+
+        return RedirectToPage("/Items/Desk");
     }
 
     private async Task<SelectList> PopulateTagItemsAsync(Guid userId, CancellationToken ct)

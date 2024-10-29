@@ -15,4 +15,21 @@ public static class EnumMapping
             _ => throw new ArgumentOutOfRangeException(nameof(location))
         };
     }
+
+    public static ItemStatus MapToDomain(ItemStatusEnum status)
+    {
+        return status switch
+        {
+            ItemStatusEnum.Assembled => ItemStatus.Assembled,
+            ItemStatusEnum.Based => ItemStatus.Based,
+            ItemStatusEnum.Finished => ItemStatus.Finished,
+            ItemStatusEnum.None => ItemStatus.None,
+            ItemStatusEnum.OnSpure => ItemStatus.OnSpure,
+            ItemStatusEnum.Painted => ItemStatus.Painted,
+            ItemStatusEnum.PartAssembled => ItemStatus.PartAssembled,
+            ItemStatusEnum.PartPainted => ItemStatus.PartPainted,
+            ItemStatusEnum.Primed => ItemStatus.Primed,
+            _ => throw new ArgumentOutOfRangeException(nameof(status))
+        };
+    }
 }

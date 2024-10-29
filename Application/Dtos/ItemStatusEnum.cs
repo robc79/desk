@@ -4,6 +4,8 @@ namespace Desk.Application.Dtos;
 
 public enum ItemStatusEnum
 {
+    None = 0,
+    
     [Display(Name="On spure")]
     OnSpure = 1,
 
