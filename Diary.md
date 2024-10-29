@@ -4,7 +4,7 @@
 
 ### Todo
 
-- (s) Trim unnecessary authentication UI.
+- [done] (s) Trim unnecessary authentication UI.
 - (m) Enable email verification of created accounts.
 - [done] (xs) Remove side links from miniatures pages.
 - (l) Add text comments to items.

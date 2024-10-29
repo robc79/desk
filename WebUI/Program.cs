@@ -7,6 +7,9 @@ using Desk.Application.UseCases.ViewTag;
 using Serilog;
 using Serilog.Events;
 using Serilog.Formatting.Json;
+using Desk.Application.Configuration;
+using Desk.Application.Identity.Services;
+using Microsoft.AspNetCore.Identity.UI.Services;
 
 Log.Logger = new LoggerConfiguration()
     .MinimumLevel.Override("Microsoft.AspNetCore", LogEventLevel.Warning)
@@ -24,11 +27,20 @@ try
 
     // Add services to the container.
     builder.Services.AddRazorPages();
-    builder.Services.AddDefaultIdentity<User>().AddEntityFrameworkStores<DeskDbContext>();
+    
+    builder.Services
+        .AddDefaultIdentity<User>(options =>
+        {
+            options.SignIn.RequireConfirmedEmail = builder.Configuration.GetValue<bool>("Identity:RequireAuthenticatedEmail");
+        })
+        .AddEntityFrameworkStores<DeskDbContext>();
+    
+    builder.Services.AddTransient<IEmailSender, MailKitEmailSender>();
 
     builder.Services.AddMediatR(c => c.RegisterServicesFromAssemblyContaining<ViewUserTagHandler>());
 
-    builder.Services.AddDbContext<DeskDbContext>(options => {
+    builder.Services.AddDbContext<DeskDbContext>(options =>
+    {
         var connString = builder.Configuration.GetConnectionString("Desk");
         options.UseSqlServer(connString);
     });
@@ -37,6 +49,10 @@ try
     builder.Services.AddScoped<ITagRepository, TagRepository>();
     builder.Services.AddScoped<IUserRepository, UserRepository>();
     builder.Services.AddScoped<IItemRepository, ItemRepository>();
+
+    var emailSenderConfig = new EmailSenderConfiguration();
+    builder.Configuration.GetSection(EmailSenderConfiguration.SectionName).Bind(emailSenderConfig);
+    builder.Services.AddSingleton(emailSenderConfig);
 
     var app = builder.Build();
 
