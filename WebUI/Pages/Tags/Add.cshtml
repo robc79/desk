@@ -1,0 +1,35 @@
+﻿@page
+@model Desk.WebUI.Pages.Tags.AddModel
+@{
+    ViewData["Title"] = "Add Tag";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Add Tag</h1>
+</div>
+
+
+<div class="row">
+    <div class="col-2"></div>
+    
+    <div class="card mb-3 col-lg-8 justify-content-center">
+        <div class="card-body">
+            <div class="card-text">
+                <form method="post">
+                    <div class="mb-3">
+                        <label asp-for="Form.Name" class="form-label"></label>
+                        <input asp-for="Form.Name" class="form-control" />
+                        <span asp-validation-for="Form.Name" class="text-danger"></span>
+                    </div>
+                    <input type="submit" value="Add" />
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-2"></div>
+</div>
+
+@section scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
