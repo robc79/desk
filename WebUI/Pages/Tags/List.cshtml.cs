@@ -11,7 +11,6 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Desk.WebUI.Pages.Tags;
 
-[Authorize]
 public class ListModel : PageModel
 {    
     private readonly IMediator _mediator;

@@ -26,7 +26,10 @@ try
     builder.Host.UseSerilog();
 
     // Add services to the container.
-    builder.Services.AddRazorPages();
+    builder.Services.AddRazorPages(options => {
+        options.Conventions.AuthorizeFolder("/Items");
+        options.Conventions.AuthorizeFolder("/Tags");
+    });
     
     builder.Services
         .AddDefaultIdentity<User>(options =>
