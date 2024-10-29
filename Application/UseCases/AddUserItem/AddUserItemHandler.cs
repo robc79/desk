@@ -2,11 +2,14 @@ using Desk.Application.Mapping;
 using Desk.Domain.Entities;
 using Desk.Domain.Repositories;
 using MediatR;
+using Microsoft.Extensions.Logging;
 
 namespace Desk.Application.UseCases.AddUserItem;
 
 public class AddUserItemHandler : IRequestHandler<AddUserItemRequest, AddUserItemResponse>
 {
+    private readonly ILogger<AddUserItemHandler> _logger;
+    
     private readonly IUnitOfWork _unitOfWork;
     
     private readonly ITagRepository _tagRepository;
@@ -16,11 +19,13 @@ public class AddUserItemHandler : IRequestHandler<AddUserItemRequest, AddUserIte
     private readonly IUserRepository _userRepository;
 
     public AddUserItemHandler(
+        ILogger<AddUserItemHandler> logger,
         IUnitOfWork unitOfWork,
         ITagRepository tagRepository,
         IItemRepository itemRepository,
         IUserRepository userRepository)
     {
+        _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         _unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
         _tagRepository = tagRepository ?? throw new ArgumentNullException(nameof(tagRepository));
         _itemRepository = itemRepository ?? throw new ArgumentNullException(nameof(itemRepository));
@@ -71,7 +76,7 @@ public class AddUserItemHandler : IRequestHandler<AddUserItemRequest, AddUserIte
         }
         catch (Exception ex)
         {
-            // TODO: Log exception.
+            _logger.LogError(ex, "Failed to add new item - {@request}.", request);
             error = ex.Message;
         }
 

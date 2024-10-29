@@ -21,17 +21,17 @@ try
 {
     var builder = WebApplication.CreateBuilder(args);
     builder.Host.UseSerilog();
-    
+
     // Add services to the container.
     builder.Services.AddRazorPages();
     builder.Services.AddDefaultIdentity<User>().AddEntityFrameworkStores<DeskDbContext>();
+
+    builder.Services.AddMediatR(c => c.RegisterServicesFromAssemblyContaining<ViewUserTagHandler>());
 
     builder.Services.AddDbContext<DeskDbContext>(options => {
         var connString = builder.Configuration.GetConnectionString("Desk");
         options.UseSqlServer(connString);
     });
-
-    builder.Services.AddMediatR(c => c.RegisterServicesFromAssemblyContaining<ViewUserTagHandler>());
 
     builder.Services.AddScoped<IUnitOfWork>(services => services.GetRequiredService<DeskDbContext>());
     builder.Services.AddScoped<ITagRepository, TagRepository>();

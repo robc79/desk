@@ -1,20 +1,27 @@
 using Desk.Domain.Entities;
 using Desk.Domain.Repositories;
 using MediatR;
+using Microsoft.Extensions.Logging;
 
 namespace Desk.Application.UseCases.AddUserTag;
 
 public class AddUserTagHandler : IRequestHandler<AddUserTagRequest, AddUserTagResponse>
 {
     private readonly IUnitOfWork _unitOfWork;
+    
     private readonly ITagRepository _tagRepository;
+    
     private readonly IUserRepository _userRepository;
 
+    private readonly ILogger<AddUserTagHandler> _logger;
+
     public AddUserTagHandler(
+        ILogger<AddUserTagHandler> logger,
         IUnitOfWork unitOfWork,
         ITagRepository tagRepository,
         IUserRepository userRepository)
     {
+        _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         _unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
         _tagRepository = tagRepository ?? throw new ArgumentNullException(nameof(tagRepository));
         _userRepository = userRepository ?? throw new ArgumentNullException(nameof(userRepository));
@@ -41,7 +48,7 @@ public class AddUserTagHandler : IRequestHandler<AddUserTagRequest, AddUserTagRe
         }
         catch (Exception ex)
         {
-            // TODO: Log exception.
+            _logger.LogError(ex, "Failed to add new tag - {@request}.", request);
             saveFailed = true;
             failureReason = ex.Message;
         }
