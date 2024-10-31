@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Identity.UI.Services;
 
-namespace Desk.Application.Identity;
+namespace Desk.Application.Identity.Services;
 
 public class DummyEmailSender : IEmailSender
 {
