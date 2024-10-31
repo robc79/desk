@@ -10,6 +10,7 @@ using Serilog.Formatting.Json;
 using Desk.Application.Configuration;
 using Desk.Application.Identity.Services;
 using Microsoft.AspNetCore.Identity.UI.Services;
+using Desk.Application.Identity;
 
 Log.Logger = new LoggerConfiguration()
     .MinimumLevel.Override("Microsoft.AspNetCore", LogEventLevel.Warning)
@@ -38,7 +39,14 @@ try
         })
         .AddEntityFrameworkStores<DeskDbContext>();
     
-    builder.Services.AddTransient<IEmailSender, MailKitEmailSender>();
+    if (builder.Configuration.GetValue<bool>("Identity:LiveEmailSenderEnabled"))
+    {
+        builder.Services.AddTransient<IEmailSender, MailKitEmailSender>();
+    }
+    else
+    {
+        builder.Services.AddTransient<IEmailSender, DummyEmailSender>();
+    }
 
     builder.Services.AddMediatR(c => c.RegisterServicesFromAssemblyContaining<ViewUserTagHandler>());
 
