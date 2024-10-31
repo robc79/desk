@@ -6,6 +6,7 @@
 
 - [done] (s) Trim unnecessary authentication UI.
 - (m) Enable email verification of created accounts.
+    - Implemented and sending tested. Cannot test the click link till on production.
 - [done] (xs) Remove side links from miniatures pages.
 - (l) Add text comments to items.
 - (s) View an item.
@@ -16,3 +17,5 @@
 - (l) Allow upload of one small image per item once in the tabletop location.
     - Show as a thumbnail on the summary card.
 - [done] (xs) Affiliate link banners for Element Games.
+- (s) restyle identity pages.
+    - Scaffold missing pages.
