@@ -1,0 +1,55 @@
+﻿@page "{itemId:int}"
+@using Desk.Application.Dtos
+@model Desk.WebUI.Pages.Items.EditModel
+@{
+    ViewData["Title"] = "Edit Item";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Edit Item</h1>
+</div>
+
+<div class="row">
+    <div class="col-2"></div>
+    
+    <div class="card mb-3 col-lg-8 justify-content-center">
+        <div class="card-body">
+            <div class="card-text">
+                <form method="post">
+                    <div class="mb-3">
+                        <label asp-for="Form.Name" class="form-label"></label>
+                        <input asp-for="Form.Name" class="form-control" />
+                        <span asp-validation-for="Form.Name" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="Form.Description" class="form-label"></label>
+                        <textarea asp-for="Form.Description" class="form-control" rows="5" style="resize: none;" ></textarea>
+                        <span asp-validation-for="Form.Description" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="Form.SelectedLocationId" class="form-label">Location</label>
+                        <select asp-for="Form.SelectedLocationId" asp-items="Html.GetEnumSelectList<ItemLocationEnum>()" class="form-control"></select>
+                        <span asp-validation-for="Form.SelectedLocationId" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="Form.SelectedStatusId" class="form-label">Status</label>
+                        <select asp-for="Form.SelectedStatusId" asp-items="Html.GetEnumSelectList<ItemStatusEnum>()" class="form-control"></select>
+                        <span asp-validation-for="Form.SelectedLocationId" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="Form.SelectedTagIds" class="form-label">Tags</label>
+                        <select size="3" asp-for="Form.SelectedTagIds" asp-items="Model.TagItems" class="form-control"></select>
+                        <span asp-validation-for="Form.SelectedTagIds" class="text-danger"></span>
+                    </div>
+                    <input type="submit" value="Save" /> | <a asp-page="/Items/View" asp-route-itemid="@Request.RouteValues["itemId"]">Cancel</a>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-2"></div>
+</div>
+
+@section scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

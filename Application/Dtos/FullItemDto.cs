@@ -8,6 +8,10 @@ public class FullItemDto
 
     public string? Description { get; set; }
 
+    public ItemLocationEnum Location { get; set; }
+
+    public ItemStatusEnum CurrentStatus { get; set; }
+
     public TagDto[] Tags { get; set; } = [];
 
     public TextCommentDto[] TextComments { get; set; } = [];

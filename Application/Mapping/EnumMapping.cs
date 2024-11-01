@@ -1,3 +1,4 @@
+using System.Security.Cryptography;
 using Desk.Application.Dtos;
 using Desk.Domain.Entities;
 
@@ -16,6 +17,17 @@ public static class EnumMapping
         };
     }
 
+    public static ItemLocationEnum MapFromDomain(ItemLocation location)
+    {
+        return location switch
+        {
+            ItemLocation.Pile => ItemLocationEnum.Pile,
+            ItemLocation.Desk => ItemLocationEnum.Desk,
+            ItemLocation.Tabletop => ItemLocationEnum.Tabletop,
+            _ => throw new ArgumentOutOfRangeException(nameof(location))
+        };
+    }
+
     public static ItemStatus MapToDomain(ItemStatusEnum status)
     {
         return status switch
@@ -29,6 +41,23 @@ public static class EnumMapping
             ItemStatusEnum.PartAssembled => ItemStatus.PartAssembled,
             ItemStatusEnum.PartPainted => ItemStatus.PartPainted,
             ItemStatusEnum.Primed => ItemStatus.Primed,
+            _ => throw new ArgumentOutOfRangeException(nameof(status))
+        };
+    }
+    
+    public static ItemStatusEnum MapFromDomain(ItemStatus status)
+    {
+        return status switch
+        {
+            ItemStatus.Assembled => ItemStatusEnum.Assembled,
+            ItemStatus.Based => ItemStatusEnum.Based,
+            ItemStatus.Finished => ItemStatusEnum.Finished,
+            ItemStatus.None => ItemStatusEnum.None,
+            ItemStatus.OnSpure => ItemStatusEnum.OnSpure,
+            ItemStatus.Painted => ItemStatusEnum.Painted,
+            ItemStatus.PartAssembled => ItemStatusEnum.PartAssembled,
+            ItemStatus.PartPainted => ItemStatusEnum.PartPainted,
+            ItemStatus.Primed => ItemStatusEnum.Primed,
             _ => throw new ArgumentOutOfRangeException(nameof(status))
         };
     }

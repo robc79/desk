@@ -21,7 +21,7 @@
                 }
             </div>
              <div class="card-footer">
-                <a asp-page="/Items/Edit">Edit</a>
+                <a asp-page="/Items/Edit" asp-route-itemid="@Model.Item!.Id">Edit</a>
             </div>
         </div>
     </div>
