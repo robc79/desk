@@ -5,8 +5,8 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 using System.Text.Encodings.Web;
+using Desk.Application.Configuration;
 using Desk.Domain.Entities;
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -23,13 +23,15 @@ namespace WebUI.Areas.Identity.Pages.Account
         private readonly IUserEmailStore<User> _emailStore;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
+        private readonly IdentityConfiguration _idConfig;
 
         public RegisterModel(
             UserManager<User> userManager,
             IUserStore<User> userStore,
             SignInManager<User> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            IdentityConfiguration idConfig)
         {
             _userManager = userManager;
             _userStore = userStore;
@@ -37,6 +39,7 @@ namespace WebUI.Areas.Identity.Pages.Account
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+            _idConfig = idConfig;
         }
 
         /// <summary>
@@ -88,9 +91,16 @@ namespace WebUI.Areas.Identity.Pages.Account
         }
 
 
-        public void OnGet(string returnUrl = null)
+        public IActionResult OnGet(string returnUrl = null)
         {
+            if (!_idConfig.RegistrationsEnabled)
+            {
+                return RedirectToPage("/Identity/Account/Login");
+            }
+
             ReturnUrl = returnUrl;
+
+            return Page();
         }
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)

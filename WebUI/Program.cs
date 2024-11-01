@@ -38,7 +38,7 @@ try
         })
         .AddEntityFrameworkStores<DeskDbContext>();
     
-    if (builder.Configuration.GetValue<bool>("Identity:LiveEmailSenderEnabled"))
+    if (builder.Configuration.GetValue<bool>("Identity:RequireAuthenticatedEmail"))
     {
         builder.Services.AddTransient<IEmailSender, MailKitEmailSender>();
     }
@@ -63,6 +63,10 @@ try
     var emailSenderConfig = new EmailSenderConfiguration();
     builder.Configuration.GetSection(EmailSenderConfiguration.SectionName).Bind(emailSenderConfig);
     builder.Services.AddSingleton(emailSenderConfig);
+
+    var identityConfig = new IdentityConfiguration();
+    builder.Configuration.GetSection(IdentityConfiguration.SectionName).Bind(identityConfig);
+    builder.Services.AddSingleton(identityConfig);
 
     var app = builder.Build();
 
