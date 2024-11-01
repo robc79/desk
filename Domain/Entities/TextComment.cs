@@ -22,23 +22,6 @@ public class TextComment
     }
 
     public Guid OwnerId { get; set; }
-    
-    private User _owner;
-
-    public User Owner
-    {
-        get { return _owner; }
-        
-        set
-        {
-            if (value is null)
-            {
-                throw new ArgumentNullException(nameof(value), "Owner must be supplied.");
-            }
-
-            _owner = value;
-        }
-    }
 
     public int ItemId { get; set; }
 
@@ -65,9 +48,8 @@ public class TextComment
     {
     }
 
-    public TextComment(User owner, Item item, string comment)
+    public TextComment(Item item, string comment)
     {
-        Owner = owner;
         Item = item;
         Comment = comment;
     }
