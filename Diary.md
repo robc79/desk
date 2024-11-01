@@ -44,5 +44,6 @@ Didn't restyle the management pages once signed in though.
     - Show as a thumbnail on the summary card.
 - [done] (xs) Toggle registration of new accounts on and off.
 - (xs) Configure error pages for common 400, 404, and 500.
+- (xs) Investigate query splitting warning from EF Core.
 
 ### Notes

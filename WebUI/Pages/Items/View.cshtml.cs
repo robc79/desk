@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations;
 using System.Security.Claims;
 using Desk.Application.Dtos;
 using Desk.Application.UseCases.ViewUserItem;
@@ -9,9 +10,19 @@ namespace Desk.WebUI.Pages.Items;
 
 public class ViewModel : PageModel
 {
+    public class EditDescriptionFormModel
+    {
+        public string? Description { get; set; } = string.Empty;
+    }
+
     private readonly IMediator _mediator;
 
     public FullItemDto? Item { get; set; }
+
+    public bool IsEditable { get; set; } = false;
+
+    [BindProperty]
+    public EditDescriptionFormModel EditDescriptionForm { get; set; } = new EditDescriptionFormModel();
 
     public ViewModel(IMediator mediator)
     {
@@ -32,6 +43,24 @@ public class ViewModel : PageModel
         
         Item = response;
 
+        if (Request.Query.ContainsKey("isEditable"))
+        {
+            IsEditable = true;
+        }
+
+
         return Page();
+    }
+
+    public async Task<IActionResult> OnPostEditDescriptionAsync(int itemId, CancellationToken ct)
+    {
+        if (!ModelState.IsValid)
+        {
+            return Page();
+        }
+
+        // TODO: Call out to mediator, update the item description.
+
+        return RedirectToPage("/Items/View");
     }
 }

@@ -3,7 +3,6 @@ using System.Security.Claims;
 using Desk.Application.Dtos;
 using Desk.Application.UseCases.AddUserItem;
 using Desk.Application.UseCases.ListUserTags;
-using Desk.Application.UseCases.ViewTag;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
