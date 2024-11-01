@@ -21,8 +21,6 @@ public class TextComment
         }
     }
 
-    public Guid OwnerId { get; set; }
-
     public int ItemId { get; set; }
 
     private Item _item;
