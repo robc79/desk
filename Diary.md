@@ -45,6 +45,8 @@ Didn't restyle the management pages once signed in though.
 - [done] (xs) Toggle registration of new accounts on and off.
 - (xs) Configure error pages for common 400, 404, and 500.
 - (xs) Investigate query splitting warning from EF Core.
+- (xs) Change wording on index page copy when logged in.
+- (s) Make messages on miniatures pages responsive to presence/number of items.
 
 ### Notes
 

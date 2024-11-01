@@ -3,6 +3,7 @@ using System.Security.Claims;
 using Desk.Application.Dtos;
 using Desk.Application.UseCases.ListUserTags;
 using Desk.Application.UseCases.ViewUserItem;
+using Desk.WebUI.Extensions;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -40,8 +41,7 @@ public class EditModel : PageModel
 
     public async Task<IActionResult> OnGetAsync(int itemId, CancellationToken ct)
     {
-        var idClaim = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier);
-        var userId = Guid.Parse(idClaim!.Value);
+        var userId = HttpContext.User.UserIdentifier(HttpContext);
         TagItems = await PopulateTagItemsAsync(userId, ct);
         
         var request = new ViewUserItemRequest(userId, itemId);
@@ -59,6 +59,21 @@ public class EditModel : PageModel
         Form.SelectedTagIds = response.Tags.Select(t => t.Id).ToArray();
 
         return Page();
+    }
+
+    public async Task<IActionResult> OnPostAsync(int itemId, CancellationToken ct)
+    {
+        var userId = HttpContext.User.UserIdentifier(HttpContext);
+        await PopulateTagItemsAsync(userId, ct);
+
+        if (!ModelState.IsValid)
+        {
+            return Page();
+        }
+
+        // TODO: Build request and send via mediator.
+
+        return RedirectToPage("/Items/View", new { itemId });
     }
 
     private async Task<SelectList> PopulateTagItemsAsync(Guid userId, CancellationToken ct)

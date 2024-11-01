@@ -4,6 +4,7 @@ using Desk.Application.Dtos;
 using Desk.Application.UseCases.AddUserTag;
 using Desk.Application.UseCases.ListUserTags;
 using Desk.Shared;
+using Desk.WebUI.Extensions;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -24,8 +25,7 @@ public class ListModel : PageModel
 
     public async Task<IActionResult> OnGetAsync(CancellationToken ct)
     {
-        var idClaim = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier);
-        var userId = Guid.Parse(idClaim!.Value);
+        var userId = HttpContext.User.UserIdentifier(HttpContext);
         var request = new ListUserTagsRequest(userId);
         var response = await _mediator.Send(request, ct);
         Tags = response;

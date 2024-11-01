@@ -1,6 +1,7 @@
 using System.Security.Claims;
 using Desk.Application.Dtos;
 using Desk.Application.UseCases.ViewUserItems;
+using Desk.WebUI.Extensions;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -20,8 +21,7 @@ public class TabletopModel : PageModel
 
     public async Task OnGetAsync(CancellationToken ct)
     {
-        var idClaim = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier);
-        var userId = Guid.Parse(idClaim!.Value);
+        var userId = HttpContext.User.UserIdentifier(HttpContext);
         var request = new ViewUserItemsRequest(userId, ItemLocationEnum.Tabletop);
         var response = await _mediator.Send(request, ct);
         TabletopItems = response;

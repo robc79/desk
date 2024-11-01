@@ -3,6 +3,7 @@ using System.Security.Claims;
 using Desk.Application.Dtos;
 using Desk.Application.UseCases.AddUserItem;
 using Desk.Application.UseCases.ListUserTags;
+using Desk.WebUI.Extensions;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -47,8 +48,7 @@ public class AddModel : PageModel
 
     public async Task<IActionResult> OnPostAsync(CancellationToken ct)
     {
-        var idClaim = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier);
-        var userId = Guid.Parse(idClaim!.Value);
+        var userId = HttpContext.User.UserIdentifier(HttpContext);
         TagItems = await PopulateTagItemsAsync(userId, ct);
 
         if (!ModelState.IsValid)
