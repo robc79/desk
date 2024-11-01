@@ -12,38 +12,23 @@
     <div class="col-8">
         <div class="card mb-3">
             <div class="card-body">
-                @if (@Model.IsEditable)
-                {
-                    <form method="post" asp-page-handler="EditDescription">
-                        <div class="mb-3">
-                            <label asp-for="EditDescriptionForm.Description" class="form-label"></label>
-                            <textarea asp-for="EditDescriptionForm.Description" class="form-control" rows="5" style="resize: none;"></textarea>
-                            <span asp-validation-for="EditDescriptionForm.Description" class="text-danger"></span>
-                        </div>
-                        <input type="submit" value="Save" />
-                        | <a asp-page="/Items/View">Cancel</a>
-                    </form>
-                }
-                else
-                {
-                    <div>
-                        @Model.Item!.Description
-                    </div>
-                }
-                
+                <div>
+                    @Model.Item!.Description
+                </div>
                 @foreach (var tag in Model.Item!.Tags)
                 {
                     <span class="badge rounded-pill bg-primary">@tag.Name</span>
                 }
             </div>
-            @if (!@Model.IsEditable)
-            {
-                <div class="card-footer">
-                    <a asp-page="/Items/View" asp-route-isEditable="true">Edit</a>
-                </div>
-            }
+             <div class="card-footer">
+                <a asp-page="/Items/Edit">Edit</a>
+            </div>
         </div>
     </div>
 </div>
 
-Comments go here...
+<div class="row justify-content-center mb-3">
+    <div class="col-8">
+        Comments go here...
+    </div>
+</div>

@@ -2,18 +2,18 @@ using Desk.Domain.Repositories;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
-namespace Desk.Application.UseCases.UpdateUserItemDescription;
+namespace Desk.Application.UseCases.UpdateUserItem;
 
-public class UpdateUserItemDescriptionHandler : IRequestHandler<UpdateUserItemDescriptionRequest, UpdateUserItemDescriptionResponse>
+public class UpdateUserItemHandler : IRequestHandler<UpdateUserItemRequest, UpdateUserItemResponse>
 {
     private readonly IUnitOfWork _unitOfWork;
     
     private readonly IItemRepository _itemRepository;
 
-    private ILogger<UpdateUserItemDescriptionHandler> _logger;
+    private ILogger<UpdateUserItemHandler> _logger;
 
-    public UpdateUserItemDescriptionHandler(
-        ILogger<UpdateUserItemDescriptionHandler> logger,
+    public UpdateUserItemHandler(
+        ILogger<UpdateUserItemHandler> logger,
         IUnitOfWork unitOfWork,
         IItemRepository itemRepository)
     {
@@ -22,13 +22,13 @@ public class UpdateUserItemDescriptionHandler : IRequestHandler<UpdateUserItemDe
         _itemRepository = itemRepository ?? throw new ArgumentNullException(nameof(itemRepository));
     }
 
-    public async Task<UpdateUserItemDescriptionResponse> Handle(UpdateUserItemDescriptionRequest request, CancellationToken cancellationToken)
+    public async Task<UpdateUserItemResponse> Handle(UpdateUserItemRequest request, CancellationToken cancellationToken)
     {
         var item = await _itemRepository.GetByUserAndIdAsync(request.ItemId, request.UserId, cancellationToken);
 
         if (item is null)
         {
-            return new UpdateUserItemDescriptionResponse("Item not found.");
+            return new UpdateUserItemResponse("Item not found.");
         }
 
         item.Description = request.Description ?? string.Empty;
@@ -45,6 +45,6 @@ public class UpdateUserItemDescriptionHandler : IRequestHandler<UpdateUserItemDe
             error = ex.Message;
         }
 
-        return new UpdateUserItemDescriptionResponse(error);
+        return new UpdateUserItemResponse(error);
     }
 }

@@ -47,3 +47,8 @@ Didn't restyle the management pages once signed in though.
 - (xs) Investigate query splitting warning from EF Core.
 
 ### Notes
+
+Tags are proving to be a pain. Feature that came too early? Need to add/remove
+them on view of item and also expectation is to search on them.
+
+Do a full "edit" page for item, not the inline thing I've done so far.

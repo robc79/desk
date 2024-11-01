@@ -1,8 +1,8 @@
 using MediatR;
 
-namespace Desk.Application.UseCases.UpdateUserItemDescription;
+namespace Desk.Application.UseCases.UpdateUserItem;
 
-public class UpdateUserItemDescriptionRequest : IRequest<UpdateUserItemDescriptionResponse>
+public class UpdateUserItemRequest : IRequest<UpdateUserItemResponse>
 {
     public Guid UserId { get; }
 
@@ -10,7 +10,7 @@ public class UpdateUserItemDescriptionRequest : IRequest<UpdateUserItemDescripti
 
     public string? Description { get; }
 
-    public UpdateUserItemDescriptionRequest(
+    public UpdateUserItemRequest(
         Guid userId,
         int itemId,
         string? description)
