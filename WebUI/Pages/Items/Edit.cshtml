@@ -41,7 +41,8 @@
                         <select size="3" asp-for="Form.SelectedTagIds" asp-items="Model.TagItems" class="form-control"></select>
                         <span asp-validation-for="Form.SelectedTagIds" class="text-danger"></span>
                     </div>
-                    <input type="submit" value="Save" /> | <a asp-page="/Items/View" asp-route-itemid="@Request.RouteValues["itemId"]">Cancel</a>
+                    <input type="submit" value="Save" />
+                    | <a asp-page="/Items/View" asp-route-itemid="@Request.RouteValues["itemId"]">Cancel</a>
                 </form>
             </div>
         </div>
