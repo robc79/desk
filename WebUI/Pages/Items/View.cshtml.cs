@@ -1,6 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.Security.Claims;
 using Desk.Application.Dtos;
+using Desk.Application.UseCases.UpdateUserItemDescription;
 using Desk.Application.UseCases.ViewUserItem;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -46,8 +47,8 @@ public class ViewModel : PageModel
         if (Request.Query.ContainsKey("isEditable"))
         {
             IsEditable = true;
+            EditDescriptionForm.Description = Item.Description;
         }
-
 
         return Page();
     }
@@ -59,7 +60,16 @@ public class ViewModel : PageModel
             return Page();
         }
 
-        // TODO: Call out to mediator, update the item description.
+        var idClaim = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier);
+        var userId = Guid.Parse(idClaim!.Value);
+        var request = new UpdateUserItemDescriptionRequest(userId, itemId, EditDescriptionForm.Description);
+        var response = await _mediator.Send(request, ct);
+
+        if (response.Error is not null)
+        {
+            // TODO: Indicate there is an error.
+            return Page();
+        }
 
         return RedirectToPage("/Items/View");
     }
