@@ -58,17 +58,22 @@ public class Item
 
     public ICollection<Tag> Tags { get; protected set; }
 
+    public ICollection<TextComment> TextComments { get; protected set; }
+
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
+    
     protected Item()
     {
         Tags = [];
+        TextComments = [];
     }
 
     public Item(User owner, ItemStatus currentStatus, string name) : this()
-#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
     {
         Owner = owner;
         CurrentStatus = currentStatus;
         Name = name;
     }
+
+#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
 }

@@ -1,11 +1,28 @@
 namespace Desk.Domain.Entities;
 
-public class Tag
+public class TextComment
 {
     public int Id { get; protected set; }
 
-    public Guid OwnerId { get; set; }
+    private string _comment;
 
+    public string Comment
+    {
+        get { return _comment; }
+
+        set
+        {
+            if (String.IsNullOrWhiteSpace(value))
+            {
+                throw new ArgumentException("Comment must be supplied.", nameof(value));
+            }
+
+            _comment = value;
+        }
+    }
+
+    public Guid OwnerId { get; set; }
+    
     private User _owner;
 
     public User Owner
@@ -22,32 +39,37 @@ public class Tag
             _owner = value;
         }
     }
-    
-    private string _name;
 
-    public string Name
+    public int ItemId { get; set; }
+
+    private Item _item;
+
+    public Item Item
     {
-        get { return _name; }
+        get { return _item; }
 
         set
         {
-            if (string.IsNullOrWhiteSpace(value))
+            if (value is null)
             {
-                throw new ArgumentException("Name must be supplied.");
+                throw new ArgumentNullException(nameof(value), "Item must be supplied.");
             }
 
-            _name = value;
+            _item = value;
         }
     }
 
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
-    
-    protected Tag() { }
 
-    public Tag(User owner, string name)
+    protected TextComment()
+    {
+    }
+
+    public TextComment(User owner, Item item, string comment)
     {
         Owner = owner;
-        Name = name;
+        Item = item;
+        Comment = comment;
     }
 
 #pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.

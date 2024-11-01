@@ -37,7 +37,7 @@ Didn't restyle the management pages once signed in though.
 - (l) Add text comments to items.
 - (s) View an item.
 - (m) Edit an item.
-- (xs) Move an item to a different location.
+- (s) Move an item to a different location (state pattern).
 - (m) Paging in the form of prev/next on miniatures pages.
 - (l) S3 bucket storage implementation.
 - (l) Allow upload of one small image per item once in the tabletop location.
