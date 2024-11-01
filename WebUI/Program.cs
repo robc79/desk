@@ -59,6 +59,7 @@ try
     builder.Services.AddScoped<ITagRepository, TagRepository>();
     builder.Services.AddScoped<IUserRepository, UserRepository>();
     builder.Services.AddScoped<IItemRepository, ItemRepository>();
+    builder.Services.AddScoped<ITextCommentRepository, TextCommentRepository>();
 
     var emailSenderConfig = new EmailSenderConfiguration();
     builder.Configuration.GetSection(EmailSenderConfiguration.SectionName).Bind(emailSenderConfig);

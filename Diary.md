@@ -43,5 +43,6 @@ Didn't restyle the management pages once signed in though.
 - (l) Allow upload of one small image per item once in the tabletop location.
     - Show as a thumbnail on the summary card.
 - [done] (xs) Toggle registration of new accounts on and off.
+- (xs) Configure error pages for common 400, 404, and 500.
 
 ### Notes

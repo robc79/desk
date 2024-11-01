@@ -50,4 +50,15 @@ public class ItemRepository : IItemRepository
 
         return items;
     }
+
+    public async Task<Item?> GetWithCommentsByUserAndIdAsync(int itemId, Guid userId, CancellationToken ct)
+    {
+        var item = await _dbContext
+            .Items
+            .Include(i => i.Tags)
+            .Include(i => i.TextComments)
+            .SingleOrDefaultAsync(i => i.Id == itemId && i.OwnerId == userId);
+
+        return item;
+    }
 }
