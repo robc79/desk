@@ -2,6 +2,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Security.Claims;
 using Desk.Application.Dtos;
 using Desk.Application.UseCases.ListUserTags;
+using Desk.Application.UseCases.UpdateUserItem;
 using Desk.Application.UseCases.ViewUserItem;
 using Desk.WebUI.Extensions;
 using MediatR;
@@ -24,7 +25,7 @@ public class EditModel : PageModel
 
         public int SelectedStatusId { get; set; }
 
-        public int[]? SelectedTagIds { get; set; }
+        public int[] SelectedTagIds { get; set; } = [];
     }
 
     private readonly IMediator _mediator;
@@ -71,7 +72,22 @@ public class EditModel : PageModel
             return Page();
         }
 
-        // TODO: Build request and send via mediator.
+        var request = new UpdateUserItemRequest(
+            userId,
+            itemId,
+            Form.Name,
+            Form.Description,
+            (ItemStatusEnum)Form.SelectedStatusId,
+            (ItemLocationEnum)Form.SelectedLocationId,
+            Form.SelectedTagIds);
+
+        var response = await _mediator.Send(request, ct);
+
+        if (response.Error is not null)
+        {
+            // TODO: Indicate error.
+            return Page();
+        }
 
         return RedirectToPage("/Items/View", new { itemId });
     }
