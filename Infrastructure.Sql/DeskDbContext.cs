@@ -1,3 +1,4 @@
+using System.Reflection;
 using Desk.Domain.Entities;
 using Desk.Domain.Repositories;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -26,5 +27,25 @@ public class DeskDbContext : IdentityDbContext<User, Role, Guid>, IUnitOfWork
     {
         base.OnModelCreating(modelBuilder);
         modelBuilder.ApplyConfigurationsFromAssembly(GetType().Assembly);
+    }
+
+    public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+    {
+        ApplyTimestamps();
+        return base.SaveChangesAsync(cancellationToken);
+    }
+
+    private void ApplyTimestamps()
+    {
+        var addedItems = ChangeTracker.Entries().Where(c => c.State == EntityState.Added);
+        
+        foreach (var item in addedItems)
+        {
+            if (item.Entity.GetType().GetProperties().Any(p => p.Name == "CreatedOn"))
+            {
+                var createdOnProperty = item.Entity.GetType().GetProperty("CreatedOn");
+                createdOnProperty!.SetValue(item.Entity, DateTimeOffset.UtcNow);
+            }
+        }
     }
 }

@@ -80,8 +80,7 @@ Do a full "edit" page for item, not the inline thing I've done so far.
 
 ### Todo
 
-- (l) Add text comments to items.
-- (s) Move an item to a different location (state pattern).
+- (m) Add text comments to items.
 - (m) Paging in the form of prev/next on miniatures pages.
 - (l) S3 bucket storage implementation.
 - (l) Allow upload of one small image per item once in the tabletop location.
@@ -92,6 +91,8 @@ Do a full "edit" page for item, not the inline thing I've done so far.
 - (s) Make messages on miniatures pages responsive to presence/number of items.
 - [done] (xs) Display status enum using description.
 - (xs) After adding an item, go to the page it was added to instead of just the desk.
-- (s) Display text comments on item view.
+- [done] (s) Display text comments on item view.
+- (s) Add `CreatedOn` and `UpdatedOn` properties to all entities on save.
+- (xs) Display created date on comments.
 
 ### Notes

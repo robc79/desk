@@ -43,8 +43,19 @@
     </div>
 </div>
 
+<div class="text-center">
+    <h1 class="display-6">Log</h1>
+</div>
+
 <div class="row justify-content-center mb-3">
     <div class="col-8">
-        Comments go here...
+        @foreach (var comment in Model.Item.TextComments)
+        {
+            <div class="card mb-3">
+                <div class="card-body">
+                    @comment
+                </div>
+            </div>
+        }
     </div>
 </div>
