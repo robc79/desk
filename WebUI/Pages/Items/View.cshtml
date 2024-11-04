@@ -48,6 +48,25 @@
 </div>
 
 <div class="row justify-content-center mb-3">
+    <div class="col-8 justify-content-center">
+        <div class="card mb-3">
+            <div class="card-body">
+                <div class="card-text">
+                    <form method="post">
+                        <div class="mb-3">
+                            <label asp-for="Form.Comment" class="form-label"></label>
+                            <input asp-for="Form.Comment" class="form-control" />
+                            <span asp-validation-for="Form.Comment" class="text-danger"></span>
+                        </div>
+                        <input type="submit" value="Add" />
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row justify-content-center mb-3">
     <div class="col-8">
         @foreach (var comment in Model.Item.TextComments.OrderByDescending(c => c.CreatedOn))
         {

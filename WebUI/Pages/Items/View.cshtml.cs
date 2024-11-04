@@ -1,18 +1,30 @@
+using System.ComponentModel.DataAnnotations;
 using System.Security.Claims;
 using Desk.Application.Dtos;
+using Desk.Application.UseCases.AddUserComment;
 using Desk.Application.UseCases.ViewUserItem;
 using Desk.WebUI.Extensions;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Desk.WebUI.Pages.Items;
 
 public class ViewModel : PageModel
 {
+    public class FormModel
+    {
+        [Required]
+        public string Comment { get; set; } = string.Empty;
+    }
+
     private readonly IMediator _mediator;
 
     public FullItemDto? Item { get; set; }
+
+    [BindProperty]
+    public FormModel Form { get; set; } = new FormModel();
 
     public ViewModel(IMediator mediator)
     {
@@ -33,5 +45,25 @@ public class ViewModel : PageModel
         Item = response;
         
         return Page();
+    }
+
+    public async Task<IActionResult> OnPostAsync(int itemId, CancellationToken ct)
+    {
+        if (!ModelState.IsValid)
+        {
+            return Page();
+        }
+
+        var userId = HttpContext.User.UserIdentifier(HttpContext);
+        var request = new AddUserCommentRequest(userId, itemId, Form.Comment);
+        var response = await _mediator.Send(request, ct);
+
+        if (response.Error is not null)
+        {
+            // TODO: Indicate error somehow.
+            return Page();
+        }
+
+        return RedirectToPage("/Items/View", new { itemId });
     }
 }
