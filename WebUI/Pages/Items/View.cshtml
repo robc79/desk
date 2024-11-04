@@ -1,4 +1,5 @@
 ﻿@page "{itemId:int}"
+@using Desk.Application.Dtos
 @model Desk.WebUI.Pages.Items.ViewModel
 @{
     ViewData["Title"] = "View Item";
@@ -12,15 +13,30 @@
     <div class="col-8">
         <div class="card mb-3">
             <div class="card-body">
-                <div>
+                <div class="mb-3">
+                    @foreach (var tag in Model.Item!.Tags)
+                    {
+                        <span class="badge rounded-pill bg-primary">@tag.Name</span>
+                    }
+                    <br />
+                    @switch (Model.Item.Location)
+                    {
+                        case ItemLocationEnum.Pile:
+                            <a asp-page="/Items/Pile">@Model.Item.Location</a> <span>-</span> <h6 style="display: inline;">@Html.DisplayTextFor(model => model.Item!.CurrentStatus)</h6>
+                            break;
+                        case ItemLocationEnum.Desk:
+                            <a asp-page="/Items/Desk">@Model.Item.Location</a> <span>-</span> <h6 style="display: inline;">@Html.DisplayTextFor(model => model.Item!.CurrentStatus)</h6>
+                            break;
+                        case ItemLocationEnum.Tabletop:
+                            <a asp-page="/Items/Tabletop">@Model.Item.Location</a> <span>-</span> <h6 style="display: inline;">@Html.DisplayTextFor(model => model.Item!.CurrentStatus)</h6>
+                            break;
+                    }
+                </div>
+                <div class="mb-3">
                     @Model.Item!.Description
                 </div>
-                @foreach (var tag in Model.Item!.Tags)
-                {
-                    <span class="badge rounded-pill bg-primary">@tag.Name</span>
-                }
             </div>
-             <div class="card-footer">
+            <div class="card-footer">
                 <a asp-page="/Items/Edit" asp-route-itemid="@Model.Item!.Id">Edit</a>
             </div>
         </div>

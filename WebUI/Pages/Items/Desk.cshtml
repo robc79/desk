@@ -1,4 +1,5 @@
 ﻿@page
+@using Desk.WebUI.ViewModels
 @model Desk.WebUI.Pages.Items.DeskModel
 @{
     ViewData["Title"] = "Desk";
@@ -15,7 +16,7 @@
         
         @foreach (var item in Model.DeskItems)
         {
-            <partial name="_ItemSummaryPartial" model="item" />
+            <partial name="_ItemSummaryPartial" model="new ItemSummaryViewModel(item, false)" />
         }
     </div>
     <div class="col-2"></div>

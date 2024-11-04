@@ -1,17 +1,40 @@
-@model Desk.Application.Dtos.SummaryItemDto
+@using Desk.Application.Dtos
+@model Desk.WebUI.ViewModels.ItemSummaryViewModel
 
 <div class="card mb-3">
     <div class="card-body">
-        <div>
-            <a asp-page="/Items/View" asp-route-itemId="@Model.Id">@Model.Name</a>
+        <div class="mb-3">
+            <a asp-page="/Items/View" asp-route-itemId="@Model.Dto.Id">@Model.Dto.Name</a>
+            
+            @foreach (var tag in Model.Dto.Tags)
+            {
+                <span class="badge rounded-pill bg-primary">@tag.Name</span>
+            }
+
+            <h6>
+                @if (Model.LinkToLocation)
+                {
+                    switch (Model.Dto.Location)
+                    {
+                        case ItemLocationEnum.Pile:
+                            <a asp-page="/Items/Pile">@Model.Dto.Location</a> <span>-</span> @Html.DisplayTextFor(model => model.Dto.CurrentStatus)
+                            break;
+                        case ItemLocationEnum.Desk:
+                            <a asp-page="/Items/Desk">@Model.Dto.Location</a> <span>-</span> @Html.DisplayTextFor(model => model.Dto.CurrentStatus)
+                            break;
+                        case ItemLocationEnum.Tabletop:
+                            <a asp-page="/Items/Tabletop">@Model.Dto.Location</a> <span>-</span> @Html.DisplayTextFor(model => model.Dto.CurrentStatus)
+                            break;
+                    }
+                }
+                else
+                {
+                    @Html.DisplayTextFor(model => model.Dto.CurrentStatus)
+                }
+            </h6>
         </div>
-        <div>
-            @Model.Description
+        <div class="mb-3">
+            @Model.Dto.Description
         </div>
-        
-        @foreach (var tag in Model.Tags)
-        {
-            <span class="badge rounded-pill bg-primary">@tag.Name</span>
-        }
     </div>
 </div>

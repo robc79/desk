@@ -54,3 +54,44 @@ Tags are proving to be a pain. Feature that came too early? Need to add/remove
 them on view of item and also expectation is to search on them.
 
 Do a full "edit" page for item, not the inline thing I've done so far.
+
+## 03-11-2024
+
+### Todo
+
+- (l) Add text comments to items.
+- [done] (s) View an item.
+- [done] (m) Edit an item.
+- (s) Move an item to a different location (state pattern).
+- (m) Paging in the form of prev/next on miniatures pages.
+- (l) S3 bucket storage implementation.
+- (l) Allow upload of one small image per item once in the tabletop location.
+    - Show as a thumbnail on the summary card.
+- (xs) Configure error pages for common 400, 404, and 500.
+- (xs) Investigate query splitting warning from EF Core.
+- [done] (xs) Change wording on index page copy when logged in.
+- (s) Make messages on miniatures pages responsive to presence/number of items.
+- (xs) Display status enum using description.
+- (xs) After adding an item, go to the page it was added to instead of just the desk.
+
+### Notes
+
+## 04-11-2024
+
+### Todo
+
+- (l) Add text comments to items.
+- (s) Move an item to a different location (state pattern).
+- (m) Paging in the form of prev/next on miniatures pages.
+- (l) S3 bucket storage implementation.
+- (l) Allow upload of one small image per item once in the tabletop location.
+    - Show as a thumbnail on the summary card.
+- (xs) Configure error pages for common 400, 404, and 500.
+- (xs) Investigate query splitting warning from EF Core.
+- [done] (xs) Change wording on index page copy when logged in.
+- (s) Make messages on miniatures pages responsive to presence/number of items.
+- [done] (xs) Display status enum using description.
+- (xs) After adding an item, go to the page it was added to instead of just the desk.
+- (s) Display text comments on item view.
+
+### Notes

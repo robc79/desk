@@ -10,17 +10,9 @@ namespace Desk.WebUI.Pages.Items;
 
 public class ViewModel : PageModel
 {
-    public class EditDescriptionFormModel
-    {
-        public string? Description { get; set; } = string.Empty;
-    }
-
     private readonly IMediator _mediator;
 
     public FullItemDto? Item { get; set; }
-
-    [BindProperty]
-    public EditDescriptionFormModel EditDescriptionForm { get; set; } = new EditDescriptionFormModel();
 
     public ViewModel(IMediator mediator)
     {

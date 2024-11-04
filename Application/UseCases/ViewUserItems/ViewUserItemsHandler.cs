@@ -24,6 +24,8 @@ public class ViewUserItemsHandler : IRequestHandler<ViewUserItemsRequest, List<S
             Id = i.Id,
             Name = i.Name,
             Description = i.Description,
+            Location = EnumMapping.MapFromDomain(i.Location),
+            CurrentStatus = EnumMapping.MapFromDomain(i.CurrentStatus),
             Tags = i.Tags.Select(t => new TagDto { Id = t.Id, Name = t.Name }).ToArray()
         }).ToList();
     }

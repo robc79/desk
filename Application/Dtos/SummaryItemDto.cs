@@ -8,5 +8,9 @@ public class SummaryItemDto
 
     public string? Description { get; set; }
 
+    public ItemStatusEnum CurrentStatus { get; set; }
+
+    public ItemLocationEnum Location { get; set; }
+
     public TagDto[] Tags { get; set; } = [];
 }
