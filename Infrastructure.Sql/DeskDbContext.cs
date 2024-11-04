@@ -47,5 +47,16 @@ public class DeskDbContext : IdentityDbContext<User, Role, Guid>, IUnitOfWork
                 createdOnProperty!.SetValue(item.Entity, DateTimeOffset.UtcNow);
             }
         }
+
+        var updatedItems = ChangeTracker.Entries().Where(c => c.State == EntityState.Modified);
+
+        foreach (var item in updatedItems)
+        {
+            if (item.Entity.GetType().GetProperties().Any(p => p.Name == "UpdatedOn"))
+            {
+                var updatedOnProperty = item.Entity.GetType().GetProperty("UpdatedOn");
+                updatedOnProperty!.SetValue(item.Entity, DateTimeOffset.UtcNow);
+            }
+        }
     }
 }

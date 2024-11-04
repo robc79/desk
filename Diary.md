@@ -92,7 +92,7 @@ Do a full "edit" page for item, not the inline thing I've done so far.
 - [done] (xs) Display status enum using description.
 - (xs) After adding an item, go to the page it was added to instead of just the desk.
 - [done] (s) Display text comments on item view.
-- (s) Add `CreatedOn` and `UpdatedOn` properties to all entities on save.
+- [done] (s) Add `CreatedOn` and `UpdatedOn` properties to all entities on save.
 - (xs) Display created date on comments.
 
 ### Notes
