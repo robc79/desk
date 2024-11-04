@@ -93,6 +93,6 @@ Do a full "edit" page for item, not the inline thing I've done so far.
 - (xs) After adding an item, go to the page it was added to instead of just the desk.
 - [done] (s) Display text comments on item view.
 - [done] (s) Add `CreatedOn` and `UpdatedOn` properties to all entities on save.
-- (xs) Display created date on comments.
+- [done] (xs) Display created date on comments.
 
 ### Notes

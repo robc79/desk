@@ -30,7 +30,7 @@ public class ViewUserItemHandler : IRequestHandler<ViewUserItemRequest, FullItem
             Name = item.Name,
             Description = item.Description,
             Tags = item.Tags.Select(t => new TagDto { Id = t.Id, Name = t.Name }).ToArray(),
-            TextComments = item.TextComments.Select(c => new TextCommentDto { Id = c.Id, Comment = c.Comment }).ToArray(),
+            TextComments = item.TextComments.Select(c => new TextCommentDto { Id = c.Id, Comment = c.Comment, CreatedOn = c.CreatedOn }).ToArray(),
             Location = EnumMapping.MapFromDomain(item.Location),
             CurrentStatus = EnumMapping.MapFromDomain(item.CurrentStatus)
         };

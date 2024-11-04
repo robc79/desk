@@ -49,11 +49,16 @@
 
 <div class="row justify-content-center mb-3">
     <div class="col-8">
-        @foreach (var comment in Model.Item.TextComments)
+        @foreach (var comment in Model.Item.TextComments.OrderByDescending(c => c.CreatedOn))
         {
             <div class="card mb-3">
                 <div class="card-body">
-                    @comment
+                    <div class=mb-3>
+                        <h6>@comment.CreatedOn.ToString("dd MMM yyyy HH:mm:ss")</h6>
+                    </div>
+                    <div class="mb-3">
+                        @comment.Comment
+                    </div>
                 </div>
             </div>
         }
