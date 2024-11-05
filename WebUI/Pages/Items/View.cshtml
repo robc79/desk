@@ -14,9 +14,9 @@
         <div class="card mb-3">
             <div class="card-body">
                 <div class="mb-3">
-                    @foreach (var tag in Model.Item!.Tags)
+                    @foreach (var tag in Model.Item.Tags)
                     {
-                        <span class="badge rounded-pill bg-primary">@tag.Name</span>
+                        <span class="badge rounded-pill bg-primary"><a style="color:white;" asp-page="/Tags/Search" asp-route-tagId="@tag.Id">@tag.Name</a></span>
                     }
                     <br />
                     @switch (Model.Item.Location)
