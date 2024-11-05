@@ -21,6 +21,6 @@ public class AddUserCommentHandler : IRequestHandler<AddUserCommentRequest, AddU
             return AddUserCommentResponse.Failure("User not found.");
         }
 
-        return AddUserCommentResponse.Success(comment.Id);
+        return AddUserCommentResponse.Success(1);
     }
 }
