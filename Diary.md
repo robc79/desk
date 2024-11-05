@@ -102,15 +102,15 @@ Do a full "edit" page for item, not the inline thing I've done so far.
 ### Todo
 
 - [done] (m) Add text comments to items.
-- (m) Paging in the form of prev/next on miniatures pages.
+- (m) Paging in the form of prev/next on miniatures pages?
 - (l) S3 bucket storage implementation.
-- (l) Allow upload of one small image per item once in the tabletop location.
-    - Show as a thumbnail on the summary card.
+- (l) Allow upload of one small image per item.
+    - Show as a thumbnail on the summary card?
 - (s) Configure error pages for 400, 404, and 500.
 - [done] (xs) Investigate query splitting warning from EF Core.
 - (s) Make messages on miniatures pages responsive to presence/number of items.
 - [done] (xs) After adding an item, go to the page it was added to instead of just the desk.
-- (m) Clicking on a tag shows list of all item summaries with that tag.
+- [done] (m) Clicking on a tag shows list of all item summaries with that tag.
 
 ### Notes
 
@@ -119,3 +119,5 @@ logo.
 
 Added the `.AsSplitQuery()` call to the loading of a full item to avoid cartesian
 explosion issue with single query.
+
+Made tag pills links to tag search page.
