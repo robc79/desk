@@ -8,7 +8,7 @@
             
             @foreach (var tag in Model.Dto.Tags)
             {
-                <span class="badge rounded-pill bg-primary">@tag.Name</span>
+                <span class="badge rounded-pill bg-primary"><a style="color:white;" asp-page="/Tags/Search" asp-route-tagId="@tag.Id">@tag.Name</a></span>
             }
             <br />
             @if (Model.LinkToLocation)
