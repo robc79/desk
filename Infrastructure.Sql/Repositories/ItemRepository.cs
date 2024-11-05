@@ -40,12 +40,23 @@ public class ItemRepository : IItemRepository
         return item;
     }
 
-    public async Task<List<Item>> GetByUserAndLocation(ItemLocation location, Guid userId, CancellationToken ct)
+    public async Task<List<Item>> GetByUserAndLocationAsync(ItemLocation location, Guid userId, CancellationToken ct)
     {
         var items = await _dbContext
             .Items
             .Include(i => i.Tags)
             .Where(i => i.Location == location && i.OwnerId == userId)
+            .ToListAsync(ct);
+
+        return items;
+    }
+
+    public async Task<List<Item>> GetByUserAndTagAsync(int tagId, Guid userId, CancellationToken ct)
+    {
+        var items = await _dbContext
+            .Items
+            .Include(i => i.Tags)
+            .Where(i => i.Tags.Any(t => t.Id == tagId))
             .ToListAsync(ct);
 
         return items;

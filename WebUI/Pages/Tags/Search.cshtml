@@ -1,4 +1,5 @@
 ﻿@page "{tagId:int}"
+@using Desk.WebUI.ViewModels
 @model Desk.WebUI.Pages.Tags.SearchModel
 @{
     ViewData["Title"] = "Tag Search";
@@ -6,4 +7,17 @@
 
 <div class="text-center">
     <h1 class="display-4">Tagged - @Model.Tag.Name</h1>
+</div>
+
+<div class="row justify-content-center mb-3">
+    <div class="col-2"></div>
+    <div class="col-lg-8">
+        Here are your tagged projects.
+        
+        @foreach (var item in Model.Items)
+        {
+            <partial name="_ItemSummaryPartial" model="new ItemSummaryViewModel(item, true)" />
+        }
+    </div>
+    <div class="col-2"></div>
 </div>

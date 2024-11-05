@@ -1,5 +1,6 @@
 using Desk.Application.Dtos;
 using Desk.Application.UseCases.ViewTag;
+using Desk.Application.UseCases.ViewTaggedUserItems;
 using Desk.WebUI.Extensions;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -13,6 +14,8 @@ public class SearchModel : PageModel
 
     public TagDto Tag { get; set; } = new();
 
+    public List<SummaryItemDto> Items { get; set; } = [];
+
     public SearchModel(IMediator mediator)
     {
         _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
@@ -21,15 +24,19 @@ public class SearchModel : PageModel
     public async Task<IActionResult> OnGetAsync(int tagId, CancellationToken ct)
     {
         var userId = HttpContext.UserIdentifier();
-        var request = new ViewUserTagRequest(tagId, userId);
-        var response = await _mediator.Send(request);
+        var tagRequest = new ViewUserTagRequest(tagId, userId);
+        var tagResponse = await _mediator.Send(tagRequest);
 
-        if (response is null)
+        if (tagResponse is null)
         {
             return NotFound();
         }
 
-        Tag = response;
+        Tag = tagResponse;
+
+        var itemsRequest = new ViewTaggedUserItemsRequest(userId, tagId);
+        var itemsResponse = await _mediator.Send(itemsRequest, ct);
+        Items = itemsResponse;
 
         return Page();
     }

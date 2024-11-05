@@ -10,7 +10,9 @@ public interface IItemRepository
 
     Task DeleteAsync(int itemId, CancellationToken ct);
 
-    Task<List<Item>> GetByUserAndLocation(ItemLocation location, Guid userId, CancellationToken ct);
+    Task<List<Item>> GetByUserAndLocationAsync(ItemLocation location, Guid userId, CancellationToken ct);
 
     Task<Item?> GetWithCommentsByUserAndIdAsync(int itemId, Guid userId, CancellationToken ct);
+
+    Task<List<Item>> GetByUserAndTagAsync(int tagId, Guid userId, CancellationToken ct);
 }

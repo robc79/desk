@@ -10,28 +10,26 @@
             {
                 <span class="badge rounded-pill bg-primary">@tag.Name</span>
             }
-
-            <h6>
-                @if (Model.LinkToLocation)
+            <br />
+            @if (Model.LinkToLocation)
+            {
+                switch (Model.Dto.Location)
                 {
-                    switch (Model.Dto.Location)
-                    {
-                        case ItemLocationEnum.Pile:
-                            <a asp-page="/Items/Pile">@Model.Dto.Location</a> <span>-</span> @Html.DisplayTextFor(model => model.Dto.CurrentStatus)
-                            break;
-                        case ItemLocationEnum.Desk:
-                            <a asp-page="/Items/Desk">@Model.Dto.Location</a> <span>-</span> @Html.DisplayTextFor(model => model.Dto.CurrentStatus)
-                            break;
-                        case ItemLocationEnum.Tabletop:
-                            <a asp-page="/Items/Tabletop">@Model.Dto.Location</a> <span>-</span> @Html.DisplayTextFor(model => model.Dto.CurrentStatus)
-                            break;
-                    }
+                    case ItemLocationEnum.Pile:
+                        <a asp-page="/Items/Pile">@Model.Dto.Location</a> <span>-</span> <h6 style="display: inline;">@Html.DisplayTextFor(model => model.Dto.CurrentStatus)</h6>
+                        break;
+                    case ItemLocationEnum.Desk:
+                        <a asp-page="/Items/Desk">@Model.Dto.Location</a> <span>-</span> <h6 style="display: inline;">@Html.DisplayTextFor(model => model.Dto.CurrentStatus)</h6>
+                        break;
+                    case ItemLocationEnum.Tabletop:
+                        <a asp-page="/Items/Tabletop">@Model.Dto.Location</a> <span>-</span> <h6 style="display: inline;">@Html.DisplayTextFor(model => model.Dto.CurrentStatus)</h6>
+                        break;
                 }
-                else
-                {
-                    @Html.DisplayTextFor(model => model.Dto.CurrentStatus)
-                }
-            </h6>
+            }
+            else
+            {
+                <h6>@Html.DisplayTextFor(model => model.Dto.CurrentStatus)</h6>
+            }
         </div>
         <div class="mb-3">
             @Model.Dto.Description

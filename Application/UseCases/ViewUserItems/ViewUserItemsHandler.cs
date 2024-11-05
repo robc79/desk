@@ -17,7 +17,7 @@ public class ViewUserItemsHandler : IRequestHandler<ViewUserItemsRequest, List<S
     public async Task<List<SummaryItemDto>> Handle(ViewUserItemsRequest request, CancellationToken cancellationToken)
     {
         var mappedLocation = EnumMapping.MapToDomain(request.Location);
-        var items = await _itemRepository.GetByUserAndLocation(mappedLocation, request.UserId, cancellationToken);
+        var items = await _itemRepository.GetByUserAndLocationAsync(mappedLocation, request.UserId, cancellationToken);
 
         return items.Select(i => new SummaryItemDto
         {
