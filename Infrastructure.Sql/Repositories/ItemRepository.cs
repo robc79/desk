@@ -57,6 +57,7 @@ public class ItemRepository : IItemRepository
             .Items
             .Include(i => i.Tags)
             .Include(i => i.TextComments)
+            .AsSplitQuery()
             .SingleOrDefaultAsync(i => i.Id == itemId && i.OwnerId == userId);
 
         return item;

@@ -87,7 +87,12 @@ public class AddModel : PageModel
             return Page();
         }
 
-        return RedirectToPage("/Items/Desk");
+        return selectedLocation switch{
+            ItemLocationEnum.Pile => RedirectToPage("/Items/Pile"),
+            ItemLocationEnum.Desk => RedirectToPage("/Items/Desk"),
+            ItemLocationEnum.Tabletop => RedirectToPage("/Items/Tabletop"),
+            _ => RedirectToPage("/Items/Pile")
+        };
     }
 
     private async Task<SelectList> PopulateTagItemsAsync(Guid userId, CancellationToken ct)
