@@ -21,7 +21,7 @@ public class PileModel : PageModel
 
     public async Task OnGetAsync(CancellationToken ct)
     {
-        var userId = HttpContext.User.UserIdentifier(HttpContext);
+        var userId = HttpContext.UserIdentifier();
         var request = new ViewUserItemsRequest(userId, ItemLocationEnum.Pile);
         var response = await _mediator.Send(request, ct);
         PileItems = response;

@@ -42,7 +42,7 @@ public class EditModel : PageModel
 
     public async Task<IActionResult> OnGetAsync(int itemId, CancellationToken ct)
     {
-        var userId = HttpContext.User.UserIdentifier(HttpContext);
+        var userId = HttpContext.UserIdentifier();
         TagItems = await PopulateTagItemsAsync(userId, ct);
         
         var request = new ViewUserItemRequest(userId, itemId);
@@ -64,7 +64,7 @@ public class EditModel : PageModel
 
     public async Task<IActionResult> OnPostAsync(int itemId, CancellationToken ct)
     {
-        var userId = HttpContext.User.UserIdentifier(HttpContext);
+        var userId = HttpContext.UserIdentifier();
         await PopulateTagItemsAsync(userId, ct);
 
         if (!ModelState.IsValid)

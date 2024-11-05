@@ -25,7 +25,7 @@ public class ListModel : PageModel
 
     public async Task<IActionResult> OnGetAsync(CancellationToken ct)
     {
-        var userId = HttpContext.User.UserIdentifier(HttpContext);
+        var userId = HttpContext.UserIdentifier();
         var request = new ListUserTagsRequest(userId);
         var response = await _mediator.Send(request, ct);
         Tags = response;

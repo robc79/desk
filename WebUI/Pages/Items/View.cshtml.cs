@@ -33,7 +33,7 @@ public class ViewModel : PageModel
 
     public async Task<IActionResult> OnGetAsync(int itemId, CancellationToken ct)
     {
-        var userId = HttpContext.User.UserIdentifier(HttpContext);
+        var userId = HttpContext.UserIdentifier();
         var request = new ViewUserItemRequest(userId, itemId);
         var response = await _mediator.Send(request, ct);
 
@@ -54,7 +54,7 @@ public class ViewModel : PageModel
             return Page();
         }
 
-        var userId = HttpContext.User.UserIdentifier(HttpContext);
+        var userId = HttpContext.UserIdentifier();
         var request = new AddUserCommentRequest(userId, itemId, Form.Comment);
         var response = await _mediator.Send(request, ct);
 

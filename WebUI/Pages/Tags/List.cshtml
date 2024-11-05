@@ -22,7 +22,9 @@
                 @foreach (var tag in Model.Tags)
                 {
                     <tr>
-                        <td>@tag.Name</td>
+                        <td>
+                            <a asp-page="/Tags/Search" asp-route-tagId="@tag.Id">@tag.Name</a>
+                        </td>
                         <td>
                             <a asp-page="/Tags/Delete" asp-route-tagId="@tag.Id">Delete</a>
                         </td>

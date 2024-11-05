@@ -22,7 +22,7 @@ namespace Desk.WebUI.Pages.Tags
 
         public async Task<IActionResult> OnGetAsync(int tagId, CancellationToken ct)
         {
-            var userId = HttpContext.User.UserIdentifier(HttpContext);
+            var userId = HttpContext.UserIdentifier();
             var request = new ViewUserTagRequest(tagId, userId);
             var response = await _mediator.Send(request, ct);
             

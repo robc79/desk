@@ -48,7 +48,7 @@ public class AddModel : PageModel
 
     public async Task<IActionResult> OnPostAsync(CancellationToken ct)
     {
-        var userId = HttpContext.User.UserIdentifier(HttpContext);
+        var userId = HttpContext.UserIdentifier();
         TagItems = await PopulateTagItemsAsync(userId, ct);
 
         if (!ModelState.IsValid)

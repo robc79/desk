@@ -21,7 +21,7 @@ public class DeskModel : PageModel
 
     public async Task OnGetAsync(CancellationToken ct)
     {
-        var userId = HttpContext.User.UserIdentifier(HttpContext);
+        var userId = HttpContext.UserIdentifier();
         var request = new ViewUserItemsRequest(userId, ItemLocationEnum.Desk);
         var response = await _mediator.Send(request, ct);
         DeskItems = response;

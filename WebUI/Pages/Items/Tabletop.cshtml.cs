@@ -21,7 +21,7 @@ public class TabletopModel : PageModel
 
     public async Task OnGetAsync(CancellationToken ct)
     {
-        var userId = HttpContext.User.UserIdentifier(HttpContext);
+        var userId = HttpContext.UserIdentifier();
         var request = new ViewUserItemsRequest(userId, ItemLocationEnum.Tabletop);
         var response = await _mediator.Send(request, ct);
         TabletopItems = response;

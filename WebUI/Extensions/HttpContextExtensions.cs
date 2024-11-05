@@ -2,9 +2,9 @@ using System.Security.Claims;
 
 namespace Desk.WebUI.Extensions;
 
-public static class ClaimsPrincipleExtensions
+public static class HttpContextExtensions
 {
-    public static Guid UserIdentifier(this ClaimsPrincipal principle, HttpContext context)
+    public static Guid UserIdentifier(this HttpContext context)
     {
         var idClaim = context.User.FindFirst(ClaimTypes.NameIdentifier);
         var userId = Guid.Parse(idClaim!.Value);

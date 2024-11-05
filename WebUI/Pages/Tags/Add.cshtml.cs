@@ -35,7 +35,7 @@ public class AddModel : PageModel
             return Page();
         }
 
-        var userId = HttpContext.User.UserIdentifier(HttpContext);
+        var userId = HttpContext.UserIdentifier();
         var request = new AddUserTagRequest(userId, Form.Name);
         var response = await _mediator.Send(request);
         // TODO: Handle error in a visual way.
