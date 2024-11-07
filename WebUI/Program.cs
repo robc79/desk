@@ -11,11 +11,14 @@ using Desk.Application.Configuration;
 using Desk.Application.Identity.Services;
 using Microsoft.AspNetCore.Identity.UI.Services;
 
+var cfg = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
+var logLocation = cfg.GetValue<string>("FileLocations:LogLocation")!;
+
 Log.Logger = new LoggerConfiguration()
     .MinimumLevel.Override("Microsoft.AspNetCore", LogEventLevel.Warning)
     .MinimumLevel.Override("Microsoft.EntityFrameworkCore", LogEventLevel.Warning)
     .WriteTo.Console()
-    .WriteTo.File(path: "Logs\\log.json", rollingInterval: RollingInterval.Day, formatter: new JsonFormatter())
+    .WriteTo.File(path: logLocation, rollingInterval: RollingInterval.Day, formatter: new JsonFormatter())
     .CreateLogger();
 
 Log.Information("Atomic batteries to power, turbines to speed.");
