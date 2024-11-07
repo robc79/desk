@@ -121,3 +121,15 @@ Added the `.AsSplitQuery()` call to the loading of a full item to avoid cartesia
 explosion issue with single query.
 
 Made tag pills links to tag search page.
+
+## 2024-11-07
+
+### Todo
+
+- (m) Paging in the form of prev/next on miniatures pages?
+- (l) S3 bucket storage implementation.
+- (l) Allow upload of one small image per item.
+- (s) Configure error pages for 400, 404, and 500.
+- (s) Make messages on miniatures pages responsive to presence/number of items.
+
+### Notes

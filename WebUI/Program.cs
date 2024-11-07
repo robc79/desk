@@ -80,6 +80,7 @@ try
     }
 
     app.UseHttpsRedirection();
+    app.UseStatusCodePagesWithReExecute("/Errors/Error{0}");
     app.UseStaticFiles();
 
     app.UseRouting();
