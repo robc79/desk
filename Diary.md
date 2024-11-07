@@ -132,7 +132,11 @@ Made tag pills links to tag search page.
 - [done] (s) Configure error pages for 400, 404, and 500.
 - (s) Make messages on miniatures pages responsive to presence/number of items.
 - (s) BUG: AO affiliate image doesn't flex / resize on small screens.
+- (xs) Return a 500 error when an error is returned from the application layer.
+- (xs) Review unhandled error page logic / format.
 
 ### Notes
+
+Site published to the world!
 
 BUG: Consider side drop banners instead of top banner for advertising images.
