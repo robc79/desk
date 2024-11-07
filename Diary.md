@@ -131,5 +131,8 @@ Made tag pills links to tag search page.
 - (l) Allow upload of one small image per item.
 - [done] (s) Configure error pages for 400, 404, and 500.
 - (s) Make messages on miniatures pages responsive to presence/number of items.
+- (s) BUG: AO affiliate image doesn't flex / resize on small screens.
 
 ### Notes
+
+BUG: Consider side drop banners instead of top banner for advertising images.
