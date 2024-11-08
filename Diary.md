@@ -154,6 +154,7 @@ BUG: Consider side drop banners instead of top banner for advertising images.
 - [done] (xs) Return a 500 error when an error is returned from the application layer.
 - (xs) Review unhandled error page logic / format.
 - [done] (xs) Remove privacy link from footer.
+- (xs) Limit file upload size on item add and item edit pages.
 
 ### Notes
 
