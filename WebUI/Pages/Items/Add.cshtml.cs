@@ -83,8 +83,7 @@ public class AddModel : PageModel
 
         if (response.Error is not null)
         {
-            // TODO: Indicate there is an error.
-            return Page();
+            return StatusCode(500);
         }
 
         return selectedLocation switch{

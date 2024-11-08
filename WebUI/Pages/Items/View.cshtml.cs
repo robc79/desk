@@ -60,8 +60,7 @@ public class ViewModel : PageModel
 
         if (response.Error is not null)
         {
-            // TODO: Indicate error somehow.
-            return Page();
+            return StatusCode(500);
         }
 
         return RedirectToPage("/Items/View", new { itemId });

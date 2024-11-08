@@ -38,7 +38,11 @@ public class AddModel : PageModel
         var userId = HttpContext.UserIdentifier();
         var request = new AddUserTagRequest(userId, Form.Name);
         var response = await _mediator.Send(request);
-        // TODO: Handle error in a visual way.
+        
+        if (response.Error is not null)
+        {
+            return StatusCode(500);
+        }
 
         return RedirectToPage("/Tags/List");
     }

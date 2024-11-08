@@ -85,8 +85,7 @@ public class EditModel : PageModel
 
         if (response.Error is not null)
         {
-            // TODO: Indicate error.
-            return Page();
+            return StatusCode(500);
         }
 
         return RedirectToPage("/Items/View", new { itemId });
