@@ -147,7 +147,8 @@ BUG: Consider side drop banners instead of top banner for advertising images.
 
 - (m) Paging in the form of prev/next on miniatures pages?
 - (l) Wasabi/S3 bucket storage implementation.
-- (l) Allow upload of images to log.
+- (l) Allow upload of image on item creation.
+- (m) Allow upload of image on item edit (replaces the one already there).
 - (s) Make messages on miniatures pages responsive to presence/number of items.
 - [done] (s) BUG: AO affiliate image doesn't flex / resize on small screens.
 - [done] (xs) Return a 500 error when an error is returned from the application layer.
@@ -165,3 +166,5 @@ Allowing uploads, seems I can only have one handler per page when using a file
 upload form. Allow one image attached directly to the miniature. Can be done from
 any stage (pile, desk, tabletop).
 
+Added a service interface for Wasabi to `Application` project. New project added
+for the implementation `Infrastructure.Wasabi`.

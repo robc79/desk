@@ -10,13 +10,14 @@ public class WasabiService : IWasabiService
 
     public WasabiService(WasabiConfiguration config)
     {
-        _config = config ?? throw new ArgumentNullException(nameof(config));    
+        _config = config ?? throw new ArgumentNullException(nameof(config));
+        // TODO: Setup AWS SDK for S3 bucket access using keys in config.
     }
 
     public async Task<string> UploadImageAsync(byte[] imageBytes, Guid ownerId, CancellationToken ct)
     {
         var assignedFilename = Guid.NewGuid();
-
+        // TODO: Call out to Wasabi and upload the file.
         return assignedFilename.ToString();
     }
 }
