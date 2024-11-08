@@ -28,6 +28,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Infrastructure.Sql\Infrastructure.Sql.csproj" />
     <ProjectReference Include="..\Application\Application.csproj" />
+    <ProjectReference Include="..\Infrastructure.Wasabi\Infrastructure.Wasabi.csproj" />
   </ItemGroup>
 
 </Project>

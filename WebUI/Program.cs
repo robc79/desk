@@ -10,6 +10,8 @@ using Serilog.Formatting.Json;
 using Desk.Application.Configuration;
 using Desk.Application.Identity.Services;
 using Microsoft.AspNetCore.Identity.UI.Services;
+using Desk.Domain.Services;
+using Desk.Infrastructure.Wasabi.Services;
 
 var cfg = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
 var logLocation = cfg.GetValue<string>("FileLocations:LogLocation")!;
@@ -64,6 +66,8 @@ try
     builder.Services.AddScoped<IItemRepository, ItemRepository>();
     builder.Services.AddScoped<ITextCommentRepository, TextCommentRepository>();
 
+    builder.Services.AddSingleton<IWasabiService, WasabiService>();
+    
     var emailSenderConfig = new EmailSenderConfiguration();
     builder.Configuration.GetSection(EmailSenderConfiguration.SectionName).Bind(emailSenderConfig);
     builder.Services.AddSingleton(emailSenderConfig);
