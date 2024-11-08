@@ -10,8 +10,7 @@
 </div>
 
 <div class="row justify-content-center mb-3">
-    <div class="col-2"></div>
-    <div class="col-lg-8">
+    <div class="col-8">
         Here are your in progress projects.
         
         @foreach (var item in Model.DeskItems)
@@ -19,5 +18,4 @@
             <partial name="_ItemSummaryPartial" model="new ItemSummaryViewModel(item, false)" />
         }
     </div>
-    <div class="col-2"></div>
 </div>
