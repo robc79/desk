@@ -146,13 +146,13 @@ BUG: Consider side drop banners instead of top banner for advertising images.
 ### Todo
 
 - (m) Paging in the form of prev/next on miniatures pages?
-- (l) S3 bucket storage implementation.
-- (l) Allow upload of one small image per item.
+- (l) Wasabi/S3 bucket storage implementation.
+- (l) Allow upload of images to log.
 - (s) Make messages on miniatures pages responsive to presence/number of items.
 - [done] (s) BUG: AO affiliate image doesn't flex / resize on small screens.
 - [done] (xs) Return a 500 error when an error is returned from the application layer.
 - (xs) Review unhandled error page logic / format.
-- (xs) Remove privacy link from footer.
+- [done] (xs) Remove privacy link from footer.
 
 ### Notes
 
@@ -160,3 +160,6 @@ Used fluid styling and auto margins to make banner image flex on resize.
 
 Signed up to Wasabi for S3 bucket access at a fixed price per month. Get a one
 month free trial.
+
+Allowing uploads, seems I can only have one handler per page when using a file
+upload form.
