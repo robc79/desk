@@ -146,15 +146,18 @@ BUG: Consider side drop banners instead of top banner for advertising images.
 ### Todo
 
 - (m) Paging in the form of prev/next on miniatures pages?
-- (l) Wasabi/S3 bucket storage implementation.
-- (l) Allow upload of image on item creation.
-- (m) Allow upload of image on item edit (replaces the one already there).
+- [done] (m) Wasabi/S3 bucket storage implementation.
+- [done] (m) Allow upload of image on item creation.
+- (m) Allow changing of image on item edit (replaces the one already there).
+- [done] (s) Display image on Item view page.
 - (s) Make messages on miniatures pages responsive to presence/number of items.
 - [done] (s) BUG: AO affiliate image doesn't flex / resize on small screens.
 - [done] (xs) Return a 500 error when an error is returned from the application layer.
 - (xs) Review unhandled error page logic / format.
 - [done] (xs) Remove privacy link from footer.
-- (xs) Limit file upload size on item add and item edit pages.
+- [done] (xs) Limit file upload size on item add item page.
+- (xs) Investigate resizing images once submitted to the application.
+- (s) Allow removal of an image from an item.
 
 ### Notes
 
