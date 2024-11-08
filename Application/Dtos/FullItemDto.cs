@@ -15,4 +15,6 @@ public class FullItemDto
     public TagDto[] Tags { get; set; } = [];
 
     public TextCommentDto[] TextComments { get; set; } = [];
+
+    public byte[]? ImageBytes { get; set; }
 }

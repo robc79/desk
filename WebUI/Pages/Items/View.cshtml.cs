@@ -23,6 +23,8 @@ public class ViewModel : PageModel
 
     public FullItemDto? Item { get; set; }
 
+    public string? Base64EncodedItemImage { get; set; }
+
     [BindProperty]
     public FormModel Form { get; set; } = new FormModel();
 
@@ -43,7 +45,12 @@ public class ViewModel : PageModel
         }
         
         Item = response;
-        
+
+        if (Item.ImageBytes is not null)
+        {
+            Base64EncodedItemImage = Convert.ToBase64String(Item.ImageBytes);
+        }
+
         return Page();
     }
 
