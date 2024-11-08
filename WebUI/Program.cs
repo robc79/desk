@@ -10,8 +10,8 @@ using Serilog.Formatting.Json;
 using Desk.Application.Configuration;
 using Desk.Application.Identity.Services;
 using Microsoft.AspNetCore.Identity.UI.Services;
-using Desk.Domain.Services;
 using Desk.Infrastructure.Wasabi.Services;
+using Desk.Application.Services;
 
 var cfg = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
 var logLocation = cfg.GetValue<string>("FileLocations:LogLocation")!;
@@ -75,6 +75,10 @@ try
     var identityConfig = new IdentityConfiguration();
     builder.Configuration.GetSection(IdentityConfiguration.SectionName).Bind(identityConfig);
     builder.Services.AddSingleton(identityConfig);
+
+    var wasabiConfig = new WasabiConfiguration();
+    builder.Configuration.GetSection(WasabiConfiguration.SectionName).Bind(wasabiConfig);
+    builder.Services.AddSingleton(wasabiConfig);
 
     var app = builder.Build();
 
