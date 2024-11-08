@@ -158,7 +158,7 @@ BUG: Consider side drop banners instead of top banner for advertising images.
 - [done] (xs) Limit file upload size on item add item page.
 - (xs) Investigate resizing images once submitted to the application.
 - (s) Allow removal of an image from an item.
-
+s
 ### Notes
 
 Used fluid styling and auto margins to make banner image flex on resize.

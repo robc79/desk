@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Desk.WebUI.Pages.Items;
 
-[RequestFormLimits(MultipartBodyLengthLimit = Constants.MaxImageUploadSize)] 
+[RequestFormLimits(MultipartBodyLengthLimit = Constants.MaxImageUploadSize)]
 public class AddModel : PageModel
 {
     public class FormModel
@@ -47,8 +47,7 @@ public class AddModel : PageModel
 
     public async Task OnGetAsync(CancellationToken ct)
     {
-        var idClaim = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier);
-        var userId = Guid.Parse(idClaim!.Value);
+        var userId = HttpContext.UserIdentifier();
         TagItems = await PopulateTagItemsAsync(userId, ct);
     }
 
