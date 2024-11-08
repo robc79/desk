@@ -9,24 +9,27 @@ namespace Desk.Infrastructure.Wasabi.Services;
 public class WasabiService : IWasabiService
 {
     private readonly WasabiConfiguration _config;
+    private readonly AmazonS3Config _s3Config;
 
     public WasabiService(WasabiConfiguration config)
     {
         _config = config ?? throw new ArgumentNullException(nameof(config));
         AWSConfigs.AWSRegion = _config.Region;
+        _s3Config = new AmazonS3Config { ServiceURL = "https://s3.wasabisys.com" };
     }
 
     public async Task<string> UploadImageAsync(byte[] imageBytes, Guid ownerId, CancellationToken ct)
     {
-        var assignedFilename = Guid.NewGuid().ToString();
+        var assignedFilename = $"{ownerId}/{Guid.NewGuid()}";
 
-        using (var s3 = new AmazonS3Client(_config.Id, _config.Secret))
+        using (var s3 = new AmazonS3Client(_config.Id, _config.Secret, _s3Config))
+        using (var ms = new MemoryStream(imageBytes))
         {
             var putRequest = new PutObjectRequest
             {
                 BucketName = _config.BucketName,
-                FilePath = ownerId.ToString(),
-                Key = assignedFilename
+                Key = assignedFilename,
+                InputStream = ms
             };
 
             var response = await s3.PutObjectAsync(putRequest, ct);

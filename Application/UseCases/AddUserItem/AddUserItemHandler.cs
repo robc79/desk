@@ -1,4 +1,5 @@
 using Desk.Application.Mapping;
+using Desk.Application.Services;
 using Desk.Domain.Entities;
 using Desk.Domain.Repositories;
 using MediatR;
@@ -18,18 +19,22 @@ public class AddUserItemHandler : IRequestHandler<AddUserItemRequest, AddUserIte
 
     private readonly IUserRepository _userRepository;
 
+    private readonly IWasabiService _wasabiService;
+
     public AddUserItemHandler(
         ILogger<AddUserItemHandler> logger,
         IUnitOfWork unitOfWork,
         ITagRepository tagRepository,
         IItemRepository itemRepository,
-        IUserRepository userRepository)
+        IUserRepository userRepository,
+        IWasabiService wasabiService)
     {
         _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         _unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
         _tagRepository = tagRepository ?? throw new ArgumentNullException(nameof(tagRepository));
         _itemRepository = itemRepository ?? throw new ArgumentNullException(nameof(itemRepository));
         _userRepository = userRepository ?? throw new ArgumentNullException(nameof(userRepository));
+        _wasabiService = wasabiService ?? throw new ArgumentNullException(nameof(wasabiService));
     }
 
     public async Task<AddUserItemResponse> Handle(AddUserItemRequest request, CancellationToken cancellationToken)
@@ -69,7 +74,9 @@ public class AddUserItemHandler : IRequestHandler<AddUserItemRequest, AddUserIte
         
         if (request.ImageBytes is not null)
         {
-            // TODO: Add image to Wasabi, save filename on item as ImageName.
+            var filename = await _wasabiService.UploadImageAsync(request.ImageBytes, owner.Id, cancellationToken);
+            // TODO: Catch application level exception.
+            item.ImageName = filename;
         }
 
         var error = string.Empty;
