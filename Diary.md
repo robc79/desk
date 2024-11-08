@@ -162,4 +162,6 @@ Signed up to Wasabi for S3 bucket access at a fixed price per month. Get a one
 month free trial.
 
 Allowing uploads, seems I can only have one handler per page when using a file
-upload form.
+upload form. Allow one image attached directly to the miniature. Can be done from
+any stage (pile, desk, tabletop).
+

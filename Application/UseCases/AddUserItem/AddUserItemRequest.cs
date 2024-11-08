@@ -9,6 +9,8 @@ public class AddUserItemRequest : IRequest<AddUserItemResponse>
 
     public string Name { get; }
 
+    public byte[]? ImageBytes { get; }
+
     public string? Description { get; }
 
     public ItemLocationEnum Location { get; }
@@ -20,6 +22,7 @@ public class AddUserItemRequest : IRequest<AddUserItemResponse>
     public AddUserItemRequest(
         Guid userId,
         string name,
+        byte[]? imageBytes,
         string? description,
         ItemLocationEnum location,
         ItemStatusEnum status,
@@ -27,6 +30,7 @@ public class AddUserItemRequest : IRequest<AddUserItemResponse>
     {
         UserId = userId;
         Name = name;
+        ImageBytes = imageBytes;
         Description = description;
         Location = location;
         Status = status;

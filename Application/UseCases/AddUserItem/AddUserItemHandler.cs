@@ -67,6 +67,11 @@ public class AddUserItemHandler : IRequestHandler<AddUserItemRequest, AddUserIte
             item.Tags.Add(tag);
         }
         
+        if (request.ImageBytes is not null)
+        {
+            // TODO: Add image to Wasabi, save filename on item as ImageName.
+        }
+
         var error = string.Empty;
 
         try

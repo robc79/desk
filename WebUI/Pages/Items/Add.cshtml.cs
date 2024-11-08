@@ -18,6 +18,8 @@ public class AddModel : PageModel
         [Required]
         public string Name { get; set; } = string.Empty;
 
+        public IFormFile? ImageUpload { get; set; }
+
         public string? Description { get; set; } = string.Empty;
 
         public int SelectedLocationId { get; set; }
@@ -26,6 +28,8 @@ public class AddModel : PageModel
 
         public int[]? SelectedTagIds { get; set; }
     }
+
+    private readonly string[] _expectedImageExtensions = [ ".jpg", ".jpeg"];
 
     private readonly IMediator _mediator;
 
@@ -69,10 +73,29 @@ public class AddModel : PageModel
         {
             return BadRequest();
         }
+
+        byte[]? imageBytes = null;
+
+        if (Form.ImageUpload != null)
+        {
+            var untrustedExt = Path.GetExtension(Form.ImageUpload.FileName.ToLowerInvariant());
+
+            if (!_expectedImageExtensions.Contains(untrustedExt))
+            {
+                return BadRequest();
+            }
+
+            using (var ms = new MemoryStream())
+            {
+                await Form.ImageUpload.CopyToAsync(ms, ct);
+                imageBytes = ms.ToArray();
+            }
+        }
         
         var request = new AddUserItemRequest(
             userId,
             Form.Name,
+            imageBytes,
             Form.Description,
             selectedLocation,
             selectedStatus,
