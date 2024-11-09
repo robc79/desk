@@ -5,4 +5,6 @@ public interface IWasabiService
     Task<string> UploadImageAsync(byte[] imageBytes, Guid ownerId, CancellationToken ct);
 
     Task<byte[]> DownloadImageAsync(string key, CancellationToken ct);
+
+    Task DeleteImageAsync(string key, CancellationToken ct);
 }

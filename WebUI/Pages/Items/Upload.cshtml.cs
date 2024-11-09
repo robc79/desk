@@ -1,6 +1,7 @@
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using Desk.Application.Dtos;
+using Desk.Application.UseCases.UpdateUserItemImage;
 using Desk.Application.UseCases.ViewUserItem;
 using Desk.Application.UseCases.ViewUserItemSummary;
 using Desk.Shared;
@@ -72,8 +73,15 @@ public class UploadModel : PageModel
             imageBytes = ms.ToArray();
         }
         
-        // TODO: Send request to handler with new image.
+        var userId = HttpContext.UserIdentifier();
+        var request = new UpdateUserItemImageRequest(userId, itemId, imageBytes);
+        var response = await _mediator.Send(request, ct);
 
+        if (response.Error is not null)
+        {
+            return StatusCode(500);
+        }
+        
         return RedirectToPage("/Items/View", new { itemId });
     }
 }
