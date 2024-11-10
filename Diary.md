@@ -174,7 +174,20 @@ any stage (pile, desk, tabletop).
 Added a service interface for Wasabi to `Application` project. New project added
 for the implementation `Infrastructure.Wasabi`.
 
-## 2024-1109
+## 2024-11-09
+
+### Todo
+
+- (m) Paging in the form of prev/next on miniatures pages?
+- (m) Allow changing of image on item edit (replaces the one already there).
+- (s) Make messages on miniatures pages responsive to presence/number of items.
+- (xs) Review unhandled error page logic / format.
+- (xs) Investigate resizing images once submitted to the application.
+- (s) Allow removal of an image from an item.
+
+### Notes
+
+## 2024-11-10
 
 ### Todo
 

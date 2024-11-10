@@ -3,7 +3,6 @@ using Amazon;
 using Amazon.S3;
 using Amazon.S3.Model;
 using Desk.Application.Configuration;
-using Desk.Application.Exceptions;
 using Desk.Application.Services;
 using Microsoft.Extensions.Logging;
 
@@ -25,7 +24,7 @@ public class WasabiService : IWasabiService
         _s3Config = new AmazonS3Config { ServiceURL = "https://s3.wasabisys.com" };
     }
 
-    public async Task DeleteImageAsync(string key, CancellationToken ct)
+    public async Task<bool> DeleteImageAsync(string key, CancellationToken ct)
     {
         using (var s3 = new AmazonS3Client(_config.Id, _config.Secret, _s3Config))
         {
@@ -35,21 +34,27 @@ public class WasabiService : IWasabiService
                 Key = key
             };
 
-            var response = await s3.DeleteObjectAsync(deleteRequest, ct);
-
-            if (response.HttpStatusCode != HttpStatusCode.NoContent)
+            try
             {
-                _logger.LogError("Wasabi returned {statusCode} for delete operation.", response.HttpStatusCode);
+                var response = await s3.DeleteObjectAsync(deleteRequest, ct);
 
-                throw new WasabiServiceException(
-                    "Unable to delete object.",
-                    (int)HttpStatusCode.NoContent,
-                    (int)response.HttpStatusCode);
+                if (response.HttpStatusCode != HttpStatusCode.NoContent)
+                {
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Wasabi failed on delete operation.");
+
+                return false;
             }
         }
+
+        return true;
     }
 
-    public async Task<byte[]> DownloadImageAsync(string key, CancellationToken ct)
+    public async Task<byte[]?> DownloadImageAsync(string key, CancellationToken ct)
     {
         byte[] imageBytes;
 
@@ -60,19 +65,25 @@ public class WasabiService : IWasabiService
                 BucketName = _config.BucketName,
                 Key = key
             };
-
-            var response = await s3.GetObjectAsync(getRequest, ct);
-
-            if (response.HttpStatusCode != HttpStatusCode.OK)
-            {
-                _logger.LogError("Wasabi returned {statusCode} for get operation.", response.HttpStatusCode);
-
-                throw new WasabiServiceException(
-                    "Unable to get object.",
-                    (int)HttpStatusCode.OK,
-                    (int)response.HttpStatusCode);
-            }
             
+            GetObjectResponse response;
+
+            try
+            {
+                response = await s3.GetObjectAsync(getRequest, ct);
+
+                if (response.HttpStatusCode != HttpStatusCode.OK)
+                {
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Wasabi failed on get operation.");
+
+                return null;
+            }
+
             using (var ms = new MemoryStream())
             {
                 await response.ResponseStream.CopyToAsync(ms, ct);
@@ -83,7 +94,7 @@ public class WasabiService : IWasabiService
         return imageBytes;
     }
 
-    public async Task<string> UploadImageAsync(byte[] imageBytes, Guid ownerId, CancellationToken ct)
+    public async Task<string?> UploadImageAsync(byte[] imageBytes, Guid ownerId, CancellationToken ct)
     {
         var assignedFilename = $"{ownerId}/{Guid.NewGuid()}";
 
@@ -97,16 +108,20 @@ public class WasabiService : IWasabiService
                 InputStream = ms
             };
 
-            var response = await s3.PutObjectAsync(putRequest, ct);
-
-            if (response.HttpStatusCode != HttpStatusCode.OK)
+            try
             {
-                _logger.LogError("Wasabi returned {statusCode} for put operation.", response.HttpStatusCode);
+                var response = await s3.PutObjectAsync(putRequest, ct);
 
-                throw new WasabiServiceException(
-                    "Unable to put object.",
-                    (int)HttpStatusCode.OK,
-                    (int)response.HttpStatusCode);
+                if (response.HttpStatusCode != HttpStatusCode.OK)
+                {
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Wasabi failed on put operation.");
+
+                return null;
             }
         }
              

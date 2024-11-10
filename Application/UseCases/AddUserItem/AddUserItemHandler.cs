@@ -75,7 +75,12 @@ public class AddUserItemHandler : IRequestHandler<AddUserItemRequest, AddUserIte
         if (request.ImageBytes is not null)
         {
             var filename = await _wasabiService.UploadImageAsync(request.ImageBytes, owner.Id, cancellationToken);
-            // TODO: Catch application level exception.
+            
+            if (filename is null)
+            {
+                return AddUserItemResponse.Failure("Failed to upload image.");
+            }
+
             item.ImageName = filename;
         }
 

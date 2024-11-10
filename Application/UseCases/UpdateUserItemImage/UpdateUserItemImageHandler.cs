@@ -1,4 +1,3 @@
-using Desk.Application.Exceptions;
 using Desk.Application.Services;
 using Desk.Domain.Repositories;
 using MediatR;
@@ -40,31 +39,22 @@ public class UpdateUserItemImageHandler : IRequestHandler<UpdateUserItemImageReq
         if (item.ImageName is not null)
         {
             var currentFilename = item.ImageName;
-
-            try
+            var deleteSucceeded = await _wasabiService.DeleteImageAsync(currentFilename, cancellationToken);
+            
+            if (!deleteSucceeded)
             {
-                await _wasabiService.DeleteImageAsync(currentFilename, cancellationToken);
-            }
-            catch (WasabiServiceException ex)
-            {
-                _logger.LogError(ex, "Failed to update item image - {@request}.", request);
-                
                 return new UpdateUserItemImageResponse("Unable to delete image.");
             }
-            
         }
 
-        try
+        var updatedFilename = await _wasabiService.UploadImageAsync(request.ImageBytes, request.UserId, cancellationToken);
+        
+        if (updatedFilename is null)
         {
-            var updatedFilename = await _wasabiService.UploadImageAsync(request.ImageBytes, request.UserId, cancellationToken);
-            item.ImageName = updatedFilename;
-        }
-        catch (WasabiServiceException ex)
-        {
-            _logger.LogError(ex, "Failed to update item image - {@request}.", request);
-            
             return new UpdateUserItemImageResponse("Unable to upload image.");
         }
+
+        item.ImageName = updatedFilename;
 
         string? error = null;
 
