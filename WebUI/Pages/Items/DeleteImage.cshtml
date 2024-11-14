@@ -1,4 +1,23 @@
-﻿@page
-@model MyApp.Namespace.DeleteImageModel
+﻿@page "{itemId:int}"
+@model Desk.WebUI.Pages.Items.DeleteImageModel
 @{
+    ViewData["Title"] = "Delete Image";
 }
+
+<div class="text-center">
+    <h1 class="display-4">Delete Image for - @Model.SummaryItem!.Name</h1>
+</div>
+
+<div class="row justify-content-center mb-3">
+    <div class="card mb-3 col-8 justify-content-center">
+        <div class="card-body">
+            <div class="card-text">
+                This operation cannot be undone.
+                <form method="post">
+                    <input type="submit" value="Delete" class="btn btn-danger" />
+                    | <a asp-page="/Items/View" asp-route-itemId="@Model.SummaryItem!.Id">Cancel</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
