@@ -13,6 +13,13 @@ public class UserRepository : IUserRepository
         _dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
     }
 
+    public async Task<List<User>> GetAllAsync(CancellationToken ct)
+    {
+        var users = await _dbContext.Users.ToListAsync(ct);
+
+        return users;
+    }
+
     public async Task<User?> GetByIdAsync(Guid id, CancellationToken ct)
     {
         var user = await _dbContext.Users.SingleOrDefaultAsync(u => u.Id == id);

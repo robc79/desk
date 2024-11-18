@@ -18,6 +18,18 @@ public class ItemRepository : IItemRepository
         await _dbContext.Items.AddAsync(item, ct);
     }
 
+    public async Task<int> CountUserItemsAsync(Guid userId, bool withImage, CancellationToken ct)
+    {
+        var q = _dbContext.Items.Where(i => i.OwnerId == userId);
+
+        if (withImage)
+        {
+            q = q.Where(i => i.ImageName != null);
+        }
+
+        return await q.CountAsync();
+    }
+
     public async Task DeleteAsync(int itemId, CancellationToken ct)
     {
         var item = await _dbContext.Items.SingleOrDefaultAsync(i => i.Id == itemId, ct);

@@ -20,6 +20,12 @@
         <li><a class="dropdown-item" asp-area="" asp-page="/Items/Tabletop">Tabletop</a></li>
     </ul>
 </li>
+
+@if (User.FindFirst("isAdmin")?.Value == "true")
+{
+    <partial name="_AdminNavPartial" />
+}
+
 <li class="nav-item">
     <a id="manage" class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Account</a>
 </li>

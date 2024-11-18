@@ -12,6 +12,7 @@ using Desk.Application.Identity.Services;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Desk.Infrastructure.Wasabi.Services;
 using Desk.Application.Services;
+using System.Drawing;
 
 var cfg = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
 var logLocation = cfg.GetValue<string>("FileLocations:LogLocation")!;
@@ -34,6 +35,7 @@ try
     builder.Services.AddRazorPages(options => {
         options.Conventions.AuthorizeFolder("/Items");
         options.Conventions.AuthorizeFolder("/Tags");
+        options.Conventions.AuthorizeFolder("/Reports", "AdminPolicy");
     });
     
     builder.Services
@@ -43,6 +45,17 @@ try
         })
         .AddEntityFrameworkStores<DeskDbContext>();
     
+    builder.Services.AddAuthorization(options =>
+    {
+        options.AddPolicy("AdminPolicy", policyBuilder =>
+        {
+            policyBuilder.RequireAssertion(context =>
+            {
+                return context.User.HasClaim("isAdmin", "true");
+            });
+        });
+    });
+
     if (builder.Configuration.GetValue<bool>("Identity:RequireAuthenticatedEmail"))
     {
         builder.Services.AddTransient<IEmailSender, MailKitEmailSender>();
