@@ -226,3 +226,21 @@ which you have to download vie FTP to view.
 - (s) Add a policy for `admin`, assign it to me in the database.
 
 ### Notes
+
+## 2024-11-18
+
+### Todo
+
+- (m) Paging in the form of prev/next on miniatures pages?
+- (s) Make messages on miniatures pages responsive to presence/number of items.
+- (xs) Review unhandled error page logic / format.
+- (xs) Investigate resizing images once submitted to the application.
+- (s) Add informational and warning logging to all handlers.
+- (xs) Style all buttons using Bootstrap classes.
+- (s) Save unhandled exceptions to the database.
+- (xs) Look into log shipping to a service / location for analysis.
+- (xs) Look into auditing actions in the database.
+- (m) Add report page for logged in admin to see number of users, items, and images.
+- (s) Add a policy for `admin`, assign it to me in the database.
+
+### Notes

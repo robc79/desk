@@ -18,7 +18,8 @@
                         <input asp-for="Form.ImageUpload" class="form-control" accept=".jpg, .jpeg" />
                         <span asp-validation-for="Form.ImageUpload" class="text-danger"></span>
                     </div>
-                    <input type="submit" value="Upload" />
+                    <input type="submit" value="Upload" class="btn btn-primary" />
+                    | <a asp-page="/Items/View" asp-route-itemId="@Model.SummaryItem.Id">Cancel</a>
                 </form>
             </div>
         </div>

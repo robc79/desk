@@ -44,7 +44,8 @@
                         <select size="3" asp-for="Form.SelectedTagIds" asp-items="Model.TagItems" class="form-control"></select>
                         <span asp-validation-for="Form.SelectedTagIds" class="text-danger"></span>
                     </div>
-                    <input type="submit" value="Add" />
+                    <input type="submit" class="btn btn-primary" value="Add" />
+                    | <a asp-page="/Index">Home</a>
                 </form>
             </div>
         </div>
