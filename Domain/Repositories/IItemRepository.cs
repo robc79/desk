@@ -15,6 +15,4 @@ public interface IItemRepository
     Task<Item?> GetWithCommentsByUserAndIdAsync(int itemId, Guid userId, CancellationToken ct);
 
     Task<List<Item>> GetByUserAndTagAsync(int tagId, Guid userId, CancellationToken ct);
-
-    Task<int> CountUserItemsAsync(Guid userId, bool withImage, CancellationToken ct);
 }

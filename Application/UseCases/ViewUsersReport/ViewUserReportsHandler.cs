@@ -6,29 +6,21 @@ namespace Desk.Application.UseCases.ViewUsersReport;
 
 public class ViewUsersReportHandler : IRequestHandler<ViewUsersReportRequest, List<UserReportDto>>
 {
-    private readonly IUserRepository _userRepository;
-    private readonly IItemRepository _itemRepository;
-
-    public ViewUsersReportHandler(
-        IUserRepository userRepository,
-        IItemRepository itemRepository)
+    private readonly IReportRepository _reportRepository;
+    public ViewUsersReportHandler(IReportRepository reportRepository)
     {
-        _userRepository = userRepository ?? throw new ArgumentNullException(nameof(userRepository));
-        _itemRepository = itemRepository ?? throw new ArgumentNullException(nameof(itemRepository));
+        _reportRepository = reportRepository ?? throw new ArgumentNullException(nameof(reportRepository));
     }
 
     public async Task<List<UserReportDto>> Handle(ViewUsersReportRequest request, CancellationToken cancellationToken)
     {
-        var users = await _userRepository.GetAllAsync(cancellationToken);
-        var dtos = new List<UserReportDto>();
+        var userReports = await _reportRepository.GetUserReportsAsync(cancellationToken);
 
-        foreach (var user in users)
+        return userReports.Select(r => new UserReportDto
         {
-            var items = await _itemRepository.CountUserItemsAsync(user.Id, false, cancellationToken);
-            var images = await _itemRepository.CountUserItemsAsync(user.Id, true, cancellationToken);
-            dtos.Add(new UserReportDto { Id = user.Id, Username = user.UserName, ItemCount = items, ImageCount = images});
-        }
-        
-        return dtos;
+            Username = r.Username,
+            ItemCount = r.ItemCount,
+            ImageCount = r.ImageCount
+        }).ToList();
     }
 }

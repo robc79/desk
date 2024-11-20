@@ -242,5 +242,26 @@ which you have to download vie FTP to view.
 - (xs) Look into auditing actions in the database.
 - [done] (m) Add report page for logged in admin to see number of users, items, and images.
 - [done] (xs) Add a policy for `admin`, assign it to me in the database.
+- (m) Add image upload for pile, desk, and tabletop.
+- (s) Show image if uploaded on pile, desk, and tabletop.
+- (l) Unit tests.
+
+### Notes
+
+## 2024-11-20
+
+### Todo
+
+- (m) Paging in the form of prev/next on miniatures pages?
+- (s) Make messages on miniatures pages responsive to presence/number of items.
+- (xs) Investigate resizing images once submitted to the application.
+- (s) Add informational and warning logging to all handlers.
+- (s) Save unhandled exceptions to the database.
+- (xs) Look into log shipping to a service / location for analysis.
+- (xs) Look into auditing actions in the database.
+- (m) Add image upload for pile, desk, and tabletop.
+- (s) Show image if uploaded on pile, desk, and tabletop.
+- (l) Unit tests.
+- (s) Rewrite report handle to use a dapper repo impl.
 
 ### Notes
