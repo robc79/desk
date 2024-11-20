@@ -262,6 +262,6 @@ which you have to download vie FTP to view.
 - (m) Add image upload for pile, desk, and tabletop.
 - (s) Show image if uploaded on pile, desk, and tabletop.
 - (l) Unit tests.
-- (s) Rewrite report handle to use a dapper repo impl.
+- [done] (s) Rewrite report handler to use a dapper repo impl.
 
 ### Notes
