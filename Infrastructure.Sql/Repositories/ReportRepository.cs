@@ -22,6 +22,7 @@ public class ReportRepository : IReportRepository
             select AspNetUsers.UserName as Username, count(Items.Id) as ItemCount, count(Items.ImageName) as ImageCount
             from Items
             inner join AspNetUsers on Items.OwnerId = AspNetUsers.Id
+            where Items.IsDeleted = '0'
             group by AspNetUsers.UserName";
 
         using (var connection = new SqlConnection(_connectionString))

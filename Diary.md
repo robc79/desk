@@ -280,9 +280,10 @@ which you have to download vie FTP to view.
 - (m) Add image upload for pile, desk, and tabletop.
 - (s) Show image if uploaded on pile, desk, and tabletop.
 - (l) Unit tests.
-- (s) Soft delete of items.
+- [done] (s) Soft delete of items.
 - (s) Copy of item.
 - [done] (xs) Rename wasabi service interface to `IImageService`.
+- (?) Bug on live with user report. Get a 500 page.
 
 ### Notes
 
