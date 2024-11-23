@@ -283,9 +283,12 @@ which you have to download vie FTP to view.
 - [done] (s) Soft delete of items.
 - (s) Copy of item.
 - [done] (xs) Rename wasabi service interface to `IImageService`.
-- (?) Bug on live with user report. Get a 500 page.
+- [done] (?) Bug on live with user report. Get a 500 page.
 
 ### Notes
 
 Copy of item should show the add item screen with the values filled in already,
 based on the copied item.
+
+Re-uploaded whole site to fix report error. Not getting logs written out, raise
+a support ticket. Sorted, needed to write to the `data` folder up one level.
