@@ -265,3 +265,26 @@ which you have to download vie FTP to view.
 - [done] (s) Rewrite report handler to use a dapper repo impl.
 
 ### Notes
+
+## 2024-11-23
+
+### Todo
+
+- (m) Paging in the form of prev/next on miniatures pages?
+- (s) Make messages on miniatures pages responsive to presence/number of items.
+- (xs) Investigate resizing images once submitted to the application.
+- (s) Add informational and warning logging to all handlers.
+- (s) Save unhandled exceptions to the database.
+- (xs) Look into log shipping to a service / location for analysis.
+- (xs) Look into auditing actions in the database.
+- (m) Add image upload for pile, desk, and tabletop.
+- (s) Show image if uploaded on pile, desk, and tabletop.
+- (l) Unit tests.
+- (s) Soft delete of items.
+- (s) Copy of item.
+- [done] (xs) Rename wasabi service interface to `IImageService`.
+
+### Notes
+
+Copy of item should show the add item screen with the values filled in already,
+based on the copied item.

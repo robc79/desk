@@ -1,6 +1,6 @@
 namespace Desk.Application.Services;
 
-public interface IWasabiService
+public interface IImageService
 {
     Task<string?> UploadImageAsync(byte[] imageBytes, Guid ownerId, CancellationToken ct);
 

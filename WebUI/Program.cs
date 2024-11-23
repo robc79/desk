@@ -86,7 +86,7 @@ try
         return new ReportRepository(connString!);
     });
 
-    builder.Services.AddSingleton<IWasabiService, WasabiService>();
+    builder.Services.AddSingleton<IImageService, WasabiService>();
     
     var emailSenderConfig = new EmailSenderConfiguration();
     builder.Configuration.GetSection(EmailSenderConfiguration.SectionName).Bind(emailSenderConfig);

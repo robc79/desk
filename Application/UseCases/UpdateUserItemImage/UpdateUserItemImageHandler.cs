@@ -11,7 +11,7 @@ public class UpdateUserItemImageHandler : IRequestHandler<UpdateUserItemImageReq
 
     private readonly IItemRepository _itemRepository;
 
-    private readonly IWasabiService _wasabiService;
+    private readonly IImageService _wasabiService;
 
     private readonly ILogger<UpdateUserItemImageHandler> _logger;
 
@@ -19,7 +19,7 @@ public class UpdateUserItemImageHandler : IRequestHandler<UpdateUserItemImageReq
         ILogger<UpdateUserItemImageHandler> logger,
         IUnitOfWork unitOfWork,
         IItemRepository itemRepository,
-        IWasabiService wasabiService)
+        IImageService wasabiService)
     {
         _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         _unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));

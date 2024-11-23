@@ -11,9 +11,9 @@ public class ViewUserItemHandler : IRequestHandler<ViewUserItemRequest, FullItem
 {
     private readonly IItemRepository _itemRepository;
 
-    private readonly IWasabiService _wasabiService;
+    private readonly IImageService _wasabiService;
 
-    public ViewUserItemHandler(IItemRepository itemRepository, IWasabiService wasabiService)
+    public ViewUserItemHandler(IItemRepository itemRepository, IImageService wasabiService)
     {
         _itemRepository = itemRepository ?? throw new ArgumentNullException(nameof(itemRepository));
         _wasabiService = wasabiService ?? throw new ArgumentNullException(nameof(wasabiService));

@@ -13,12 +13,12 @@ public class DeleteUserItemImageHandler : IRequestHandler<DeleteUserItemImageReq
 
     private readonly IItemRepository _itemRepository;
 
-    private readonly IWasabiService _wasabiService;
+    private readonly IImageService _wasabiService;
 
     public DeleteUserItemImageHandler(
         ILogger<DeleteUserItemImageHandler> logger,
         IUnitOfWork unitOfWork,
-        IWasabiService wasabiService,
+        IImageService wasabiService,
         IItemRepository itemRepository)
     {
         _logger = logger ?? throw new ArgumentNullException(nameof(logger));

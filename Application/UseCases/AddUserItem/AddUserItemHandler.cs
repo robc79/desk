@@ -19,7 +19,7 @@ public class AddUserItemHandler : IRequestHandler<AddUserItemRequest, AddUserIte
 
     private readonly IUserRepository _userRepository;
 
-    private readonly IWasabiService _wasabiService;
+    private readonly IImageService _wasabiService;
 
     public AddUserItemHandler(
         ILogger<AddUserItemHandler> logger,
@@ -27,7 +27,7 @@ public class AddUserItemHandler : IRequestHandler<AddUserItemRequest, AddUserIte
         ITagRepository tagRepository,
         IItemRepository itemRepository,
         IUserRepository userRepository,
-        IWasabiService wasabiService)
+        IImageService wasabiService)
     {
         _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         _unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));

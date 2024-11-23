@@ -18,24 +18,12 @@ public class ItemRepository : IItemRepository
         await _dbContext.Items.AddAsync(item, ct);
     }
 
-    public async Task DeleteAsync(int itemId, CancellationToken ct)
-    {
-        var item = await _dbContext.Items.SingleOrDefaultAsync(i => i.Id == itemId, ct);
-
-        if (item is null)
-        {
-            return;
-        }
-
-        _dbContext.Items.Remove(item);
-    }
-
     public async Task<Item?> GetByUserAndIdAsync(int itemId, Guid userId, CancellationToken ct)
     {
         var item = await _dbContext
         .Items
         .Include(i => i.Tags)
-        .SingleOrDefaultAsync(i => i.Id == itemId && i.OwnerId == userId);
+        .SingleOrDefaultAsync(i => i.Id == itemId && i.OwnerId == userId && !i.IsDeleted);
 
         return item;
     }
@@ -45,7 +33,7 @@ public class ItemRepository : IItemRepository
         var items = await _dbContext
             .Items
             .Include(i => i.Tags)
-            .Where(i => i.Location == location && i.OwnerId == userId)
+            .Where(i => i.Location == location && i.OwnerId == userId && !i.IsDeleted)
             .ToListAsync(ct);
 
         return items;
@@ -56,7 +44,7 @@ public class ItemRepository : IItemRepository
         var items = await _dbContext
             .Items
             .Include(i => i.Tags)
-            .Where(i => i.Tags.Any(t => t.Id == tagId))
+            .Where(i => i.Tags.Any(t => t.Id == tagId && i.OwnerId == userId && !i.IsDeleted))
             .ToListAsync(ct);
 
         return items;
@@ -69,7 +57,7 @@ public class ItemRepository : IItemRepository
             .Include(i => i.Tags)
             .Include(i => i.TextComments)
             .AsSplitQuery()
-            .SingleOrDefaultAsync(i => i.Id == itemId && i.OwnerId == userId);
+            .SingleOrDefaultAsync(i => i.Id == itemId && i.OwnerId == userId && !i.IsDeleted);
 
         return item;
     }

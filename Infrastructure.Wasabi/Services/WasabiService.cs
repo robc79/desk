@@ -8,7 +8,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Desk.Infrastructure.Wasabi.Services;
 
-public class WasabiService : IWasabiService
+public class WasabiService : IImageService
 {
     private readonly WasabiConfiguration _config;
     
