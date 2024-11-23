@@ -45,7 +45,7 @@ public class WasabiService : IImageService
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Wasabi failed on delete operation.");
+                _logger.LogError(ex, $"Wasabi failed on delete operation for '{key}'.");
 
                 return false;
             }
@@ -79,7 +79,7 @@ public class WasabiService : IImageService
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Wasabi failed on get operation.");
+                _logger.LogError(ex, $"Wasabi failed on get operation for '{key}'.");
 
                 return null;
             }
