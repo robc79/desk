@@ -14,22 +14,27 @@ public class ReportRepository : IReportRepository
         _connectionString = connectionString;
     }
 
-    public async Task<List<UserReport>> GetUserReportsAsync(CancellationToken ct)
+    public async Task<List<ItemReport>> GetItemReportsAsync(CancellationToken ct)
     {
-        IEnumerable<UserReport> userReports;
+        IEnumerable<ItemReport> itemReports;
         
         const string sql = @"
-            select AspNetUsers.UserName as Username, count(Items.Id) as ItemCount, count(Items.ImageName) as ImageCount
+            select
+                AspNetUsers.UserName as Username,
+                count(Items.Id) as ItemCount,
+                di.DeletedCount,
+                count(Items.ImageName) as ImageCount
             from Items
             inner join AspNetUsers on Items.OwnerId = AspNetUsers.Id
-            where Items.IsDeleted = '0'
-            group by AspNetUsers.UserName";
+            inner join (select OwnerId, count(OwnerId) as DeletedCount from Items where IsDeleted = '1' group by OwnerId) di on Items.OwnerId = di.OwnerId
+            group by AspNetUsers.UserName, di.DeletedCount
+            order by AspNetUsers.UserName";
 
         using (var connection = new SqlConnection(_connectionString))
         {
-            userReports = await connection.QueryAsync<UserReport>(sql, ct);
+            itemReports = await connection.QueryAsync<ItemReport>(sql, ct);
         }
 
-        return userReports.ToList();
+        return itemReports.ToList();
     }
 }

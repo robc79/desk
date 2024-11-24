@@ -309,8 +309,9 @@ a support ticket. Sorted, needed to write to the `data` folder up one level.
 - (l) Unit tests.
 - (s) Copy of item.
 - [done] (?) Bug, adding tag when name already exists for any user fails.
-- (xs) Rename users report to items report.
+- (s) Rename users report to items report.
 - (s) Add users report to dump out list of emails with verified status.
+- (s) Extend items report to show deleted items.
 
 ### Notes
 
