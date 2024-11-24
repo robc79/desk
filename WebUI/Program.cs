@@ -41,7 +41,7 @@ try
     builder.Services
         .AddDefaultIdentity<User>(options =>
         {
-            options.SignIn.RequireConfirmedEmail = builder.Configuration.GetValue<bool>("Identity:RequireAuthenticatedEmail");
+            options.SignIn.RequireConfirmedAccount = builder.Configuration.GetValue<bool>("Identity:RequireAuthenticatedEmail");
         })
         .AddEntityFrameworkStores<DeskDbContext>();
     

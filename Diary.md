@@ -308,9 +308,16 @@ a support ticket. Sorted, needed to write to the `data` folder up one level.
 - (s) Show image if uploaded on pile, desk, and tabletop.
 - (l) Unit tests.
 - (s) Copy of item.
-- (?) Bug, adding tag when name already exists for any user fails.
+- [done] (?) Bug, adding tag when name already exists for any user fails.
+- (xs) Rename users report to items report.
+- (s) Add users report to dump out list of emails with verified status.
 
 ### Notes
 
 Unique index on tag name is to blame for the bug. Remove it, make the handler
 for add tag idempotent.
+
+Bug with registration. Was setting `RequireConfirmedEmail` instead of
+`RequireConfirmedAccount`. Doh.
+
+Logging and then unit tests is the order of the day!
