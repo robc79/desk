@@ -292,3 +292,25 @@ based on the copied item.
 
 Re-uploaded whole site to fix report error. Not getting logs written out, raise
 a support ticket. Sorted, needed to write to the `data` folder up one level.
+
+## 2024-11-24
+
+### Todo
+
+- (m) Paging in the form of prev/next on miniatures pages?
+- (s) Make messages on miniatures pages responsive to presence/number of items.
+- (xs) Investigate resizing images once submitted to the application.
+- (s) Add informational and warning logging to all handlers.
+- (s) Save unhandled exceptions to the database.
+- (xs) Look into log shipping to a service / location for analysis.
+- (xs) Look into auditing actions in the database.
+- (m) Add image upload for pile, desk, and tabletop.
+- (s) Show image if uploaded on pile, desk, and tabletop.
+- (l) Unit tests.
+- (s) Copy of item.
+- (?) Bug, adding tag when name already exists for any user fails.
+
+### Notes
+
+Unique index on tag name is to blame for the bug. Remove it, make the handler
+for add tag idempotent.
