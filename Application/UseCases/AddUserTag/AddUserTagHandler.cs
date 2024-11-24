@@ -36,6 +36,15 @@ public class AddUserTagHandler : IRequestHandler<AddUserTagRequest, AddUserTagRe
             return AddUserTagResponse.Failure("User not found!");
         }
 
+        var existingTags = await _tagRepository.GetByUserAsync(request.UserId, cancellationToken);
+
+        if (existingTags.Any(t => t.Name == request.Name))
+        {
+            var matchingTag = existingTags.First(t => t.Name == request.Name);
+
+            return AddUserTagResponse.Success(matchingTag.Id);
+        }
+        
         var tag = new Tag(owner, request.Name);
         await _tagRepository.AddAsync(tag, cancellationToken);
 
