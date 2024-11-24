@@ -300,7 +300,7 @@ a support ticket. Sorted, needed to write to the `data` folder up one level.
 - (m) Paging in the form of prev/next on miniatures pages?
 - (s) Make messages on miniatures pages responsive to presence/number of items.
 - (xs) Investigate resizing images once submitted to the application.
-- (s) Add informational and warning logging to all handlers.
+- [done] (s) Add informational logging to all handlers.
 - (s) Save unhandled exceptions to the database.
 - (xs) Look into log shipping to a service / location for analysis.
 - (xs) Look into auditing actions in the database.
@@ -309,9 +309,9 @@ a support ticket. Sorted, needed to write to the `data` folder up one level.
 - (l) Unit tests.
 - (s) Copy of item.
 - [done] (?) Bug, adding tag when name already exists for any user fails.
-- (s) Rename users report to items report.
+- [done] (s) Rename users report to items report.
 - (s) Add users report to dump out list of emails with verified status.
-- (s) Extend items report to show deleted items.
+- [done] (s) Extend items report to show deleted items.
 
 ### Notes
 

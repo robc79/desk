@@ -29,6 +29,7 @@ public class UpdateUserItemImageHandler : IRequestHandler<UpdateUserItemImageReq
     
     public async Task<UpdateUserItemImageResponse> Handle(UpdateUserItemImageRequest request, CancellationToken cancellationToken)
     {
+        _logger.LogInformation("Update user item image - {@request}", request);
         var item = await _itemRepository.GetByUserAndIdAsync(request.ItemId, request.UserId, cancellationToken);
 
         if (item is null)

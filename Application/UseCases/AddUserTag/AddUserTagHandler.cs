@@ -29,6 +29,7 @@ public class AddUserTagHandler : IRequestHandler<AddUserTagRequest, AddUserTagRe
 
     public async Task<AddUserTagResponse> Handle(AddUserTagRequest request, CancellationToken cancellationToken)
     {
+        _logger.LogInformation("Add user tag - {@request}", request);
         var owner = await _userRepository.GetByIdAsync(request.UserId, cancellationToken);
 
         if (owner is null)

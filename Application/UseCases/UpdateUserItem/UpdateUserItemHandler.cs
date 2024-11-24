@@ -34,6 +34,7 @@ public class UpdateUserItemHandler : IRequestHandler<UpdateUserItemRequest, Upda
 
     public async Task<UpdateUserItemResponse> Handle(UpdateUserItemRequest request, CancellationToken cancellationToken)
     {
+        _logger.LogInformation("Update user item - {@request}", request);
         var owner = await _userRepository.GetByIdAsync(request.UserId, cancellationToken);
 
         if (owner is null)

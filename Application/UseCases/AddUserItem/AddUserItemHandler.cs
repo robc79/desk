@@ -39,6 +39,7 @@ public class AddUserItemHandler : IRequestHandler<AddUserItemRequest, AddUserIte
 
     public async Task<AddUserItemResponse> Handle(AddUserItemRequest request, CancellationToken cancellationToken)
     {
+        _logger.LogInformation("Add user item - {@request}", request);
         var mappedLocation = EnumMapping.MapToDomain(request.Location);
         var mappedStatus = EnumMapping.MapToDomain(request.Status);
         

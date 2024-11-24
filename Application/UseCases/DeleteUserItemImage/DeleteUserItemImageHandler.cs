@@ -29,6 +29,7 @@ public class DeleteUserItemImageHandler : IRequestHandler<DeleteUserItemImageReq
 
     public async Task<DeleteUserItemImageResponse> Handle(DeleteUserItemImageRequest request, CancellationToken cancellationToken)
     {
+        _logger.LogInformation("Delete user item image - {@request}", request);
         var item = await _itemRepository.GetByUserAndIdAsync(request.ItemId, request.UserId, cancellationToken);
 
         if (item is null)

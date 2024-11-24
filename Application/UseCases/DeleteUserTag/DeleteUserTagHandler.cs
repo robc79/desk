@@ -24,6 +24,7 @@ public class DeleteUserTagHandler : IRequestHandler<DeleteUserTagRequest, Delete
 
     public async Task<DeleteUserTagResponse> Handle(DeleteUserTagRequest request, CancellationToken cancellationToken)
     {
+        _logger.LogInformation("Delete user tag - {@request}", request);
         var response = new DeleteUserTagResponse();
         var tag = await _tagRepository.GetByUserAndIdAsync(request.TagId, request.UserId, cancellationToken);
 

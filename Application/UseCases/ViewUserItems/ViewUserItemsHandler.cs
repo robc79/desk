@@ -2,6 +2,7 @@ using Desk.Application.Dtos;
 using Desk.Application.Mapping;
 using Desk.Domain.Repositories;
 using MediatR;
+using Microsoft.Extensions.Logging;
 
 namespace Desk.Application.UseCases.ViewUserItems;
 
@@ -9,13 +10,17 @@ public class ViewUserItemsHandler : IRequestHandler<ViewUserItemsRequest, List<S
 {
     private readonly IItemRepository _itemRepository;
 
-    public ViewUserItemsHandler(IItemRepository itemRepository)
+    private readonly ILogger<ViewUserItemsHandler> _logger;
+
+    public ViewUserItemsHandler(IItemRepository itemRepository, ILogger<ViewUserItemsHandler> logger)
     {
         _itemRepository = itemRepository ?? throw new ArgumentNullException(nameof(itemRepository));
+        _logger = logger ?? throw new ArgumentNullException(nameof(logger));
     }
 
     public async Task<List<SummaryItemDto>> Handle(ViewUserItemsRequest request, CancellationToken cancellationToken)
     {
+        _logger.LogInformation("View user items - {@request}", request);
         var mappedLocation = EnumMapping.MapToDomain(request.Location);
         var items = await _itemRepository.GetByUserAndLocationAsync(mappedLocation, request.UserId, cancellationToken);
 

@@ -29,6 +29,7 @@ public class AddUserCommentHandler : IRequestHandler<AddUserCommentRequest, AddU
 
     public async Task<AddUserCommentResponse> Handle(AddUserCommentRequest request, CancellationToken cancellationToken)
     {
+        _logger.LogInformation("Add user comment - {@request}", request);
         var user = await _userRepository.GetByIdAsync(request.UserId, cancellationToken);
 
         if (user is null)

@@ -29,6 +29,7 @@ public class DeleteUserItemHandler : IRequestHandler<DeleteUserItemRequest, Dele
 
     public async Task<DeleteUserItemResponse> Handle(DeleteUserItemRequest request, CancellationToken cancellationToken)
     {
+        _logger.LogInformation("Delete user item - {@request}", request);
         var item = await _itemRepository.GetByUserAndIdAsync(request.ItemId, request.UserId, cancellationToken);
 
         if (item is null)

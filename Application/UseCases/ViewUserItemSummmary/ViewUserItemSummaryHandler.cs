@@ -2,6 +2,7 @@ using Desk.Application.Dtos;
 using Desk.Application.Mapping;
 using Desk.Domain.Repositories;
 using MediatR;
+using Microsoft.Extensions.Logging;
 
 namespace Desk.Application.UseCases.ViewUserItemSummary;
 
@@ -9,13 +10,17 @@ public class ViewUserItemSummaryHandler : IRequestHandler<ViewUserItemSummaryReq
 {
     private readonly IItemRepository _itemRepository;
 
-    public ViewUserItemSummaryHandler(IItemRepository itemRepository)
+    private readonly ILogger<ViewUserItemSummaryHandler> _logger;
+
+    public ViewUserItemSummaryHandler(IItemRepository itemRepository, ILogger<ViewUserItemSummaryHandler> logger)
     {
         _itemRepository = itemRepository ?? throw new ArgumentNullException(nameof(itemRepository));
+        _logger = logger ?? throw new ArgumentNullException(nameof(logger));
     }
 
     public async Task<SummaryItemDto?> Handle(ViewUserItemSummaryRequest request, CancellationToken cancellationToken)
     {
+        _logger.LogInformation("View user item summary - {@request}", request);
         var item = await _itemRepository.GetByUserAndIdAsync(request.ItemId, request.UserId, cancellationToken);
 
         if (item == null)

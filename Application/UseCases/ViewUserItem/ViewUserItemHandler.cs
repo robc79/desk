@@ -4,6 +4,7 @@ using Desk.Application.Services;
 using Desk.Domain.Repositories;
 using MediatR;
 using Microsoft.AspNetCore.Http.Features;
+using Microsoft.Extensions.Logging;
 
 namespace Desk.Application.UseCases.ViewUserItem;
 
@@ -11,16 +12,23 @@ public class ViewUserItemHandler : IRequestHandler<ViewUserItemRequest, FullItem
 {
     private readonly IItemRepository _itemRepository;
 
-    private readonly IImageService _wasabiService;
+    private readonly IImageService _imageService;
 
-    public ViewUserItemHandler(IItemRepository itemRepository, IImageService wasabiService)
+    private readonly ILogger<ViewUserItemHandler> _logger;
+
+    public ViewUserItemHandler(
+        IItemRepository itemRepository,
+        IImageService imageService,
+        ILogger<ViewUserItemHandler> logger)
     {
         _itemRepository = itemRepository ?? throw new ArgumentNullException(nameof(itemRepository));
-        _wasabiService = wasabiService ?? throw new ArgumentNullException(nameof(wasabiService));
+        _imageService = imageService ?? throw new ArgumentNullException(nameof(imageService));
+        _logger = logger ?? throw new ArgumentNullException(nameof(logger));
     }
 
     public async Task<FullItemDto?> Handle(ViewUserItemRequest request, CancellationToken cancellationToken)
     {
+        _logger.LogInformation("View user item - {@request}", request);
         var item = await _itemRepository.GetWithCommentsByUserAndIdAsync(request.ItemId, request.UserId, cancellationToken);
 
         if (item is null)
@@ -32,7 +40,7 @@ public class ViewUserItemHandler : IRequestHandler<ViewUserItemRequest, FullItem
 
         if (item.ImageName is not null)
         {
-            imageBytes = await _wasabiService.DownloadImageAsync(item.ImageName, cancellationToken);
+            imageBytes = await _imageService.DownloadImageAsync(item.ImageName, cancellationToken);
         }
 
         return new FullItemDto
