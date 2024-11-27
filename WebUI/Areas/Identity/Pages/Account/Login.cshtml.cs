@@ -3,7 +3,10 @@
 #nullable disable
 
 using System.ComponentModel.DataAnnotations;
+using Desk.Application.UseCases.AddUserAuditEntry;
 using Desk.Domain.Entities;
+using Desk.WebUI.Extensions;
+using MediatR;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -16,10 +19,16 @@ namespace WebUI.Areas.Identity.Pages.Account
         private readonly SignInManager<User> _signInManager;
         private readonly ILogger<LoginModel> _logger;
 
-        public LoginModel(SignInManager<User> signInManager, ILogger<LoginModel> logger)
+        private readonly IMediator _mediator;
+
+        public LoginModel(
+            SignInManager<User> signInManager,
+            ILogger<LoginModel> logger,
+            IMediator mediator)
         {
             _signInManager = signInManager;
             _logger = logger;
+            _mediator = mediator;
         }
 
         /// <summary>
@@ -99,6 +108,10 @@ namespace WebUI.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
+                    var userId = HttpContext.UserIdentifier();
+                    var auditRequest = new AddUserAuditEntryRequest(userId, "login");
+                    await _mediator.Send(auditRequest);
+
                     return LocalRedirect(returnUrl);
                 }
                 if (result.RequiresTwoFactor)

@@ -78,7 +78,8 @@ try
     builder.Services.AddScoped<IUserRepository, UserRepository>();
     builder.Services.AddScoped<IItemRepository, ItemRepository>();
     builder.Services.AddScoped<ITextCommentRepository, TextCommentRepository>();
-    
+    builder.Services.AddScoped<IUserAuditEntryRepository, UserAuditEntryRepository>();
+
     builder.Services.AddScoped<IReportRepository>(services =>
     {
         var connString = builder.Configuration.GetConnectionString("Desk");

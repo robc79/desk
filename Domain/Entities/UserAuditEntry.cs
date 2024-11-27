@@ -14,6 +14,14 @@ public class UserAuditEntry
 
     public DateTimeOffset? UpdatedOn { get; protected set; }
 
+#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
+    
+    protected UserAuditEntry()
+    {
+    }
+
+#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
+    
     public UserAuditEntry(User user, string eventType)
     {
         User = user;

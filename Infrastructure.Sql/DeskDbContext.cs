@@ -8,9 +8,13 @@ namespace Desk.Infrastructure.Sql;
 
 public class DeskDbContext : IdentityDbContext<User, Role, Guid>, IUnitOfWork
 {
+#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
+
     public DeskDbContext(DbContextOptions<DeskDbContext> options) : base(options)
     {
     }
+
+#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
 
     public DbSet<Tag> Tags { get; set; }
 
