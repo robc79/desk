@@ -18,6 +18,8 @@ public class DeskDbContext : IdentityDbContext<User, Role, Guid>, IUnitOfWork
 
     public DbSet<TextComment> TextComments { get; set; }
 
+    public DbSet<UserAuditEntry> UserAuditEntries { get; set; }
+
     public async Task CommitChangesAsync(CancellationToken ct)
     {
         _ = await SaveChangesAsync(ct);

@@ -6,5 +6,7 @@ public static class Constants
     
     public const int MaxUsernameLength = 128;
 
-    public const long MaxImageUploadSize = 1000000;
+    public const long MaxImageUploadSize = 2000000;
+
+    public const int MaxEventTypeLength = 256;
 }
