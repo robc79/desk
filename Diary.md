@@ -338,7 +338,7 @@ Logging and then unit tests is the order of the day!
 - (l) Unit tests.
 - (s) Copy of item.
 - (s) Add users report to dump out list of emails with verified status.
-- (m) Audit user login, logout, and sign-up.
+- [done] (m) Audit user login and logout.
 
 ### Notes
 
