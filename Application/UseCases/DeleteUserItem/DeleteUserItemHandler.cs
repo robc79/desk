@@ -40,6 +40,7 @@ public class DeleteUserItemHandler : IRequestHandler<DeleteUserItemRequest, Dele
         if (item.ImageName is not null)
         {
             _ = await _imageService.DeleteImageAsync(item.ImageName, cancellationToken);
+            item.ImageName = null;
         }
 
         item.IsDeleted = true;
