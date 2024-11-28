@@ -49,7 +49,7 @@ public class ReportRepository : IReportRepository
             u.EmailConfirmed as IsConfirmed,
             a.lastLoginOn as LastLoginOn
         from AspNetUsers u
-        inner join (select UserId, max(CreatedOn) as lastLoginOn from UserAuditEntries where EventType = 'login' group by UserId) a
+        left join (select UserId, max(CreatedOn) as lastLoginOn from UserAuditEntries where EventType = 'login' group by UserId) a
         on a.UserId = u.Id
         order by u.UserName";
 
