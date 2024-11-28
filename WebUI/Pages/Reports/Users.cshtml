@@ -1,0 +1,33 @@
+﻿@page
+@model Desk.WebUI.Pages.Reports.UsersModel
+@{
+    ViewData["Title"] = "Users Report";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Users Report</h1>
+</div>
+
+<div class="row justify-content-center mb-3">
+    <div class="col-8 justify-content-center">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>Is Confirmed</th>
+                    <th>Last Login On</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var report in Model.UserReports)
+                {
+                    <tr>
+                        <td>@report.Username</td>
+                        <td>@report.IsConfirmed</td>
+                        <td>@report.LastLoginOn</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

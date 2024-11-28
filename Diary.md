@@ -343,3 +343,21 @@ Logging and then unit tests is the order of the day!
 ### Notes
 
 I have a user! When, where, why? Need some auditing in the database.
+
+## 2024-11-28
+
+### Todo
+
+- (m) Paging in the form of prev/next on miniatures pages?
+- (s) Make messages on miniatures pages responsive to presence/number of items.
+- (xs) Investigate resizing images once submitted to the application.
+- (s) Save unhandled exceptions to the database.
+- (xs) Look into log shipping to a service / location for analysis.
+- (xs) Look into auditing actions in the database.
+- (m) Add image upload for pile, desk, and tabletop.
+- (s) Show image if uploaded on pile, desk, and tabletop.
+- (l) Unit tests.
+- (s) Copy of item.
+- (s) Add users report to dump out list of emails with verified status.
+
+### Notes

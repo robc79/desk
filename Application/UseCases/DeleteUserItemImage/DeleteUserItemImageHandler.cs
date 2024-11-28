@@ -46,9 +46,9 @@ public class DeleteUserItemImageHandler : IRequestHandler<DeleteUserItemImageReq
             {
                 return new DeleteUserItemImageResponse("Unable to delete image.");
             }
-        }
 
-        item.ImageName = null;
+            item.ImageName = null;
+        }
         
         string? error = null;
 

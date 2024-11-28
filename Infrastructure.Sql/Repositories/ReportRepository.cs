@@ -37,4 +37,27 @@ public class ReportRepository : IReportRepository
 
         return itemReports.ToList();
     }
+
+    public async Task<List<UserReport>> GetUserReportsAsync(CancellationToken ct)
+    {
+        IEnumerable<UserReport> userReports;
+
+        const string sql = @"
+        select
+            u.Id as UserId,
+            u.UserName as Username,
+            u.EmailConfirmed as IsConfirmed,
+            a.lastLoginOn as LastLoginOn
+        from AspNetUsers u
+        inner join (select UserId, max(CreatedOn) as lastLoginOn from UserAuditEntries where EventType = 'login' group by UserId) a
+        on a.UserId = u.Id
+        order by u.UserName";
+
+        using (var connection = new SqlConnection(_connectionString))
+        {
+            userReports = await connection.QueryAsync<UserReport>(sql, ct);
+        }
+
+        return userReports.ToList();
+    }
 }
