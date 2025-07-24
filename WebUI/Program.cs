@@ -12,7 +12,6 @@ using Desk.Application.Identity.Services;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Desk.Infrastructure.Wasabi.Services;
 using Desk.Application.Services;
-using System.Drawing;
 
 var cfg = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
 var logLocation = cfg.GetValue<string>("FileLocations:LogLocation")!;
